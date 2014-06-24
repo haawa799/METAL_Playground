@@ -9,14 +9,19 @@
 /* Begin PBXBuildFile section */
 		4304BFD1195455A800326016 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4304BFD0195455A800326016 /* main.m */; };
 		4304BFD4195455A800326016 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4304BFD3195455A800326016 /* AppDelegate.m */; };
-		4304BFD7195455A800326016 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4304BFD6195455A800326016 /* ViewController.m */; };
 		4304BFDA195455A800326016 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4304BFD8195455A800326016 /* Main.storyboard */; };
 		4304BFDC195455A800326016 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4304BFDB195455A800326016 /* Images.xcassets */; };
 		4304BFE8195455A800326016 /* MetalTryOut_ObjcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4304BFE7195455A800326016 /* MetalTryOut_ObjcTests.m */; };
-		4304BFF3195455BA00326016 /* MetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4304BFF2195455BA00326016 /* MetalView.m */; };
+		439CC3AC195A24BC0062A134 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439CC3AB195A24BC0062A134 /* MetalViewController.swift */; };
+		439CC3AF195A25310062A134 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CC3AE195A25310062A134 /* ViewController.m */; };
 		43DDD0FA19585893000C01C4 /* screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DDD0F919585893000C01C4 /* screenshot.png */; };
 		43DE480A1959B92500F2DB0B /* BaseEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DE48091959B92500F2DB0B /* BaseEffect.swift */; };
-		43DE480D1959C4AD00F2DB0B /* BaseEffectSfiftFixer.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DE480C1959C4AD00F2DB0B /* BaseEffectSfiftFixer.m */; };
+		43DE48121959EB4A00F2DB0B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DE48111959EB4A00F2DB0B /* Model.swift */; };
+		43DE48141959EBFF00F2DB0B /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DE48131959EBFF00F2DB0B /* Vertex.swift */; };
+		43DE48191959EFE700F2DB0B /* VertexBufferGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DE48181959EFE700F2DB0B /* VertexBufferGenerator.m */; };
+		43DE481B1959FBDF00F2DB0B /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DE481A1959FBDF00F2DB0B /* Triangle.swift */; };
+		43DE481F195A0D0C00F2DB0B /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DE481E195A0D0C00F2DB0B /* MetalView.swift */; };
+		43DE4821195A227B00F2DB0B /* QQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DE4820195A227B00F2DB0B /* QQViewController.swift */; };
 		43E2301119576E2B00E3F333 /* Shaders.metal in Resources */ = {isa = PBXBuildFile; fileRef = 43E2301019576E2B00E3F333 /* Shaders.metal */; };
 /* End PBXBuildFile section */
 
@@ -36,21 +41,24 @@
 		4304BFD0195455A800326016 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4304BFD2195455A800326016 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4304BFD3195455A800326016 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		4304BFD5195455A800326016 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		4304BFD6195455A800326016 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		4304BFD9195455A800326016 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4304BFDB195455A800326016 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4304BFE1195455A800326016 /* TriangleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriangleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4304BFE6195455A800326016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4304BFE7195455A800326016 /* MetalTryOut_ObjcTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetalTryOut_ObjcTests.m; sourceTree = "<group>"; };
-		4304BFF1195455BA00326016 /* MetalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalView.h; sourceTree = "<group>"; };
-		4304BFF2195455BA00326016 /* MetalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetalView.m; sourceTree = "<group>"; };
-		43DDD0F51958463E000C01C4 /* MetalViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetalViewProtocol.h; sourceTree = "<group>"; };
+		439CC3AB195A24BC0062A134 /* MetalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
+		439CC3AD195A25310062A134 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		439CC3AE195A25310062A134 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		43DDD0F919585893000C01C4 /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
 		43DE48081959B92400F2DB0B /* Triangle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Triangle-Bridging-Header.h"; sourceTree = "<group>"; };
 		43DE48091959B92500F2DB0B /* BaseEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseEffect.swift; sourceTree = "<group>"; };
-		43DE480B1959C4AD00F2DB0B /* BaseEffectSfiftFixer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEffectSfiftFixer.h; sourceTree = "<group>"; };
-		43DE480C1959C4AD00F2DB0B /* BaseEffectSfiftFixer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEffectSfiftFixer.m; sourceTree = "<group>"; };
+		43DE48111959EB4A00F2DB0B /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		43DE48131959EBFF00F2DB0B /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		43DE48171959EFE700F2DB0B /* VertexBufferGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VertexBufferGenerator.h; sourceTree = "<group>"; };
+		43DE48181959EFE700F2DB0B /* VertexBufferGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VertexBufferGenerator.m; sourceTree = "<group>"; };
+		43DE481A1959FBDF00F2DB0B /* Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		43DE481E195A0D0C00F2DB0B /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
+		43DE4820195A227B00F2DB0B /* QQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QQViewController.swift; sourceTree = "<group>"; };
 		43E2301019576E2B00E3F333 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,19 +101,22 @@
 		4304BFCD195455A800326016 /* MetalTryOut-Objc */ = {
 			isa = PBXGroup;
 			children = (
-				4304BFD5195455A800326016 /* ViewController.h */,
-				4304BFD6195455A800326016 /* ViewController.m */,
 				43E2301019576E2B00E3F333 /* Shaders.metal */,
-				4304BFF1195455BA00326016 /* MetalView.h */,
-				4304BFF2195455BA00326016 /* MetalView.m */,
-				43DDD0F51958463E000C01C4 /* MetalViewProtocol.h */,
+				43DE481E195A0D0C00F2DB0B /* MetalView.swift */,
 				4304BFD8195455A800326016 /* Main.storyboard */,
+				439CC3AD195A25310062A134 /* ViewController.h */,
+				439CC3AE195A25310062A134 /* ViewController.m */,
 				4304BFDB195455A800326016 /* Images.xcassets */,
 				4304BFCE195455A800326016 /* Supporting Files */,
 				43DE48091959B92500F2DB0B /* BaseEffect.swift */,
-				43DE480B1959C4AD00F2DB0B /* BaseEffectSfiftFixer.h */,
-				43DE480C1959C4AD00F2DB0B /* BaseEffectSfiftFixer.m */,
+				43DE48131959EBFF00F2DB0B /* Vertex.swift */,
+				43DE48171959EFE700F2DB0B /* VertexBufferGenerator.h */,
+				43DE48181959EFE700F2DB0B /* VertexBufferGenerator.m */,
+				43DE48111959EB4A00F2DB0B /* Model.swift */,
+				43DE481A1959FBDF00F2DB0B /* Triangle.swift */,
 				43DE48081959B92400F2DB0B /* Triangle-Bridging-Header.h */,
+				43DE4820195A227B00F2DB0B /* QQViewController.swift */,
+				439CC3AB195A24BC0062A134 /* MetalViewController.swift */,
 			);
 			path = "MetalTryOut-Objc";
 			sourceTree = "<group>";
@@ -240,11 +251,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4304BFF3195455BA00326016 /* MetalView.m in Sources */,
-				4304BFD7195455A800326016 /* ViewController.m in Sources */,
+				43DE48191959EFE700F2DB0B /* VertexBufferGenerator.m in Sources */,
+				43DE481B1959FBDF00F2DB0B /* Triangle.swift in Sources */,
+				439CC3AC195A24BC0062A134 /* MetalViewController.swift in Sources */,
 				4304BFD4195455A800326016 /* AppDelegate.m in Sources */,
-				43DE480D1959C4AD00F2DB0B /* BaseEffectSfiftFixer.m in Sources */,
+				43DE481F195A0D0C00F2DB0B /* MetalView.swift in Sources */,
+				439CC3AF195A25310062A134 /* ViewController.m in Sources */,
+				43DE48121959EB4A00F2DB0B /* Model.swift in Sources */,
+				43DE4821195A227B00F2DB0B /* QQViewController.swift in Sources */,
 				43DE480A1959B92500F2DB0B /* BaseEffect.swift in Sources */,
+				43DE48141959EBFF00F2DB0B /* Vertex.swift in Sources */,
 				4304BFD1195455A800326016 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

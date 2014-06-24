@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MetalViewProtocol.h"
 
-@interface ViewController : UIViewController <MetalViewProtocol>
-
+@interface ViewController : UIViewController
 
 @end
 
