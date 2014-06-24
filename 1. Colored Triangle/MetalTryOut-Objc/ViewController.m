@@ -10,6 +10,7 @@
 #import "MetalView.h"
 #import <Metal/Metal.h>
 #import <QuartzCore/CAMetalLayer.h>
+#import "Triangle-Swift.h"
 
 static const int kNumberOfVertices = 3;
 static const int kNumberOfPositionComponents = 4;
@@ -32,6 +33,8 @@ static const float verticesData[(kNumberOfPositionComponents + kNumberOfColorCom
     id <MTLCommandQueue> _commandQ;
     id <MTLBuffer> _vertexBuffer;
     id <MTLRenderPipelineState> _renderPipeline;
+    
+    BaseEffect *_baseEffect;
 }
             
 - (void)viewDidLoad
@@ -81,19 +84,27 @@ static const float verticesData[(kNumberOfPositionComponents + kNumberOfColorCom
     _commandQ = [_device newCommandQueue];
     _vertexBuffer = [_device newBufferWithBytes:verticesData length:sizeof(verticesData) options:0];
     
-    // Setup MTLRenderPipline descriptor object with vertex and fragment shader
-    MTLRenderPipelineDescriptor *pipeLineDescriptor = [MTLRenderPipelineDescriptor new];
-    id <MTLLibrary> library = [_device newDefaultLibrary];
-    pipeLineDescriptor.vertexFunction = [library newFunctionWithName:@"myVertexShader"];
-    pipeLineDescriptor.fragmentFunction = [library newFunctionWithName:@"myFragmentShader"];
-    pipeLineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
+//    // Setup MTLRenderPipline descriptor object with vertex and fragment shader
+//    MTLRenderPipelineDescriptor *pipeLineDescriptor = [MTLRenderPipelineDescriptor new];
+//    id <MTLLibrary> library = [_device newDefaultLibrary];
+//    pipeLineDescriptor.vertexFunction = [library newFunctionWithName:@"myVertexShader"];
+//    pipeLineDescriptor.fragmentFunction = [library newFunctionWithName:@"myFragmentShader"];
+//    pipeLineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormatBGRA8Unorm;
+//    
+//    // Compile the MTLRenderPipline object into immutable and cheap for use MTLRenderPipelineState
+//    NSError *error;
+//    _renderPipeline = [_device newRenderPipelineStateWithDescriptor:pipeLineDescriptor error:&error];
+//    if(error != nil){
+//        NSLog(@"%@",[error localizedDescription]);
+//    }
+//    
+//    //
     
-    // Compile the MTLRenderPipline object into immutable and cheap for use MTLRenderPipelineState
-    NSError *error;
-    _renderPipeline = [_device newRenderPipelineStateWithDescriptor:pipeLineDescriptor error:&error];
-    if(error != nil){
-        NSLog(@"%@",[error localizedDescription]);
-    }
+    _baseEffect = [[BaseEffect alloc] initWithDevice:_device
+                                    vertexShaderName:@"myVertexShader"
+                                  fragmentShaderName:@"myFragmentShader"];
+    
+    _renderPipeline = [_baseEffect compile];
 }
 
 - (void)tearDownMetal
