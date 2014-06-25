@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C7C4F90F-5B2B-4FE5-90E4-382F80829CE8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Triangle</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5136E0EA-4DA9-4973-A2EA-32C0100986A5</key>
+		<string>https://github.com/haawa799/METAL_TriangleObj-C.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>1. Colored Triangle/Triangle.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5136E0EA-4DA9-4973-A2EA-32C0100986A5</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/haawa799/METAL_TriangleObj-C.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5136E0EA-4DA9-4973-A2EA-32C0100986A5</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5136E0EA-4DA9-4973-A2EA-32C0100986A5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MetalTryOut-Objc</string>
+		</dict>
+	</array>
+</dict>
+</plist>
