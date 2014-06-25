@@ -22,19 +22,14 @@ class MetalViewController: UIViewController,MetalViewProtocol {
     var triangle:Triangle!
     var baseEffect: BaseEffect!
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        
-        
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        // Custom initialization
-    }
-    
     deinit{
         tearDownMetal()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var font = UIApplication.sharedApplication()
 
         metalView = self.view as? MetalView
         metalView.metalViewDelegate = self
