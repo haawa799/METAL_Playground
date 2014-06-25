@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4304BFD1195455A800326016 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4304BFD0195455A800326016 /* main.m */; };
-		4304BFD4195455A800326016 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4304BFD3195455A800326016 /* AppDelegate.m */; };
 		4304BFDC195455A800326016 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4304BFDB195455A800326016 /* Images.xcassets */; };
 		4304BFE8195455A800326016 /* MetalTryOut_ObjcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4304BFE7195455A800326016 /* MetalTryOut_ObjcTests.m */; };
+		435244CF195ABF1500D62D63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244CE195ABF1500D62D63 /* AppDelegate.swift */; };
 		439CC3AC195A24BC0062A134 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439CC3AB195A24BC0062A134 /* MetalViewController.swift */; };
 		43DDD0FA19585893000C01C4 /* screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 43DDD0F919585893000C01C4 /* screenshot.png */; };
 		43DE480A1959B92500F2DB0B /* BaseEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DE48091959B92500F2DB0B /* BaseEffect.swift */; };
@@ -36,13 +35,11 @@
 /* Begin PBXFileReference section */
 		4304BFCB195455A800326016 /* Triangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Triangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4304BFCF195455A800326016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4304BFD0195455A800326016 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4304BFD2195455A800326016 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		4304BFD3195455A800326016 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		4304BFDB195455A800326016 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		4304BFE1195455A800326016 /* TriangleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriangleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4304BFE6195455A800326016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4304BFE7195455A800326016 /* MetalTryOut_ObjcTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetalTryOut_ObjcTests.m; sourceTree = "<group>"; };
+		435244CE195ABF1500D62D63 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		439CC3AB195A24BC0062A134 /* MetalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
 		43DDD0F919585893000C01C4 /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
 		43DE48081959B92400F2DB0B /* Triangle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Triangle-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -117,10 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				43DDD0F919585893000C01C4 /* screenshot.png */,
-				4304BFD2195455A800326016 /* AppDelegate.h */,
-				4304BFD3195455A800326016 /* AppDelegate.m */,
+				435244CE195ABF1500D62D63 /* AppDelegate.swift */,
 				4304BFCF195455A800326016 /* Info.plist */,
-				4304BFD0195455A800326016 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -246,12 +241,11 @@
 				43DE48191959EFE700F2DB0B /* VertexBufferGenerator.m in Sources */,
 				43DE481B1959FBDF00F2DB0B /* Triangle.swift in Sources */,
 				439CC3AC195A24BC0062A134 /* MetalViewController.swift in Sources */,
-				4304BFD4195455A800326016 /* AppDelegate.m in Sources */,
 				43DE481F195A0D0C00F2DB0B /* MetalView.swift in Sources */,
 				43DE48121959EB4A00F2DB0B /* Model.swift in Sources */,
 				43DE480A1959B92500F2DB0B /* BaseEffect.swift in Sources */,
 				43DE48141959EBFF00F2DB0B /* Vertex.swift in Sources */,
-				4304BFD1195455A800326016 /* main.m in Sources */,
+				435244CF195ABF1500D62D63 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
