@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4304BFE8195455A800326016 /* MetalTryOut_ObjcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4304BFE7195455A800326016 /* MetalTryOut_ObjcTests.m */; };
+		434418FE195C474100D73ACE /* Matrix4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434418FD195C474100D73ACE /* Matrix4x4.swift */; };
+		43441901195C478400D73ACE /* UniformsBufferGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 43441900195C478400D73ACE /* UniformsBufferGenerator.m */; };
 		43479286195AC83E00FA2962 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43479282195AC83E00FA2962 /* Images.xcassets */; };
 		43479287195AC83E00FA2962 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43479283195AC83E00FA2962 /* Info.plist */; };
 		43479288195AC83E00FA2962 /* screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 43479284195AC83E00FA2962 /* screenshot.png */; };
@@ -38,6 +40,9 @@
 		4304BFE1195455A800326016 /* TriangleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriangleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4304BFE6195455A800326016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4304BFE7195455A800326016 /* MetalTryOut_ObjcTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetalTryOut_ObjcTests.m; sourceTree = "<group>"; };
+		434418FD195C474100D73ACE /* Matrix4x4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix4x4.swift; sourceTree = "<group>"; };
+		434418FF195C478400D73ACE /* UniformsBufferGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniformsBufferGenerator.h; sourceTree = "<group>"; };
+		43441900195C478400D73ACE /* UniformsBufferGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniformsBufferGenerator.m; sourceTree = "<group>"; };
 		43479282195AC83E00FA2962 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		43479283195AC83E00FA2962 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43479284195AC83E00FA2962 /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
@@ -149,6 +154,8 @@
 				435244DD195AC56B00D62D63 /* Vertex.swift */,
 				435244DE195AC56B00D62D63 /* VertexBufferGenerator.h */,
 				435244DF195AC56B00D62D63 /* VertexBufferGenerator.m */,
+				434418FF195C478400D73ACE /* UniformsBufferGenerator.h */,
+				43441900195C478400D73ACE /* UniformsBufferGenerator.m */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -156,6 +163,7 @@
 		435244DA195AC06A00D62D63 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
+				434418FD195C474100D73ACE /* Matrix4x4.swift */,
 				435244E4195AC66800D62D63 /* Model.swift */,
 				435244E5195AC66800D62D63 /* Triangle.swift */,
 			);
@@ -265,12 +273,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				435244E6195AC66800D62D63 /* Model.swift in Sources */,
+				434418FE195C474100D73ACE /* Matrix4x4.swift in Sources */,
 				435244D6195AC04000D62D63 /* AppDelegate.swift in Sources */,
 				435244E3195AC56B00D62D63 /* VertexBufferGenerator.m in Sources */,
 				435244D7195AC04000D62D63 /* MetalView.swift in Sources */,
 				435244D8195AC04000D62D63 /* MetalViewController.swift in Sources */,
 				435244E2195AC56B00D62D63 /* Vertex.swift in Sources */,
 				435244E0195AC56B00D62D63 /* BaseEffect.swift in Sources */,
+				43441901195C478400D73ACE /* UniformsBufferGenerator.m in Sources */,
 				435244E7195AC66800D62D63 /* Triangle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

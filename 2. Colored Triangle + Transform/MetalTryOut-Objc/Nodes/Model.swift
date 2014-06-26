@@ -17,6 +17,7 @@ import QuartzCore
     var vertexCount: Int
     
     var vertexBuffer: MTLBuffer?
+    var uniformsBuffer: MTLBuffer?
     
     init(name: String,
         baseEffect: BaseEffect,
@@ -30,6 +31,8 @@ import QuartzCore
         super.init()
         
         self.vertexBuffer = generateVertexBuffer(vertices, vertexCount: vertexCount, device: baseEffect.device)
+        var m = Matrix4x4()
+        self.uniformsBuffer = generateUniformsBuffer(m, device: baseEffect.device)
     }
     
     func render(commandQueue: MTLCommandQueue, drawable: CAMetalDrawable)
@@ -47,6 +50,7 @@ import QuartzCore
         var commandEncoder:MTLRenderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPassDesc)
         commandEncoder.setRenderPipelineState(baseEffect.renderPipelineState)
         commandEncoder.setVertexBuffer(vertexBuffer, offset: 0, atIndex: 0)
+        commandEncoder.setVertexBuffer(uniformsBuffer, offset: 0, atIndex: 1)
         commandEncoder.drawPrimitives(MTLPrimitiveType.Triangle, vertexStart: 0, vertexCount: vertexCount);
         commandEncoder.endEncoding();
         
@@ -59,6 +63,12 @@ import QuartzCore
         // Commit commandBuffer to his commandQueue in which he will be executed after commands before him in queue
         commandBuffer.commit();
         
+    }
+    
+    func generateUniformsBuffer(matrix: Matrix4x4, device: MTLDevice) -> MTLBuffer?
+    {
+        uniformsBuffer = UniformsBufferGenerator.generateUniformBuffer(matrix, device: device)
+        return uniformsBuffer
     }
     
     func generateVertexBuffer(vertices: Array<Vertex>, vertexCount: Int, device: MTLDevice) -> MTLBuffer?

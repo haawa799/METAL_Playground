@@ -9,6 +9,9 @@
 #include <metal_stdlib>
 using namespace metal;
 
+struct Uniforms{
+    float4 modelViewMatrixColumns[4];
+};
 
 struct Vertex{
     float4 position;
@@ -21,12 +24,27 @@ struct VertexOut
     float4 color;
 };
 
-
-vertex VertexOut myVertexShader(const global Vertex* vertexArray [[buffer(0)]],
-                                unsigned int vid [[vertex_id]])
+float4x4 mv_MatrixFromUniformBuffer(global const Uniforms*  uniformMatrix)
 {
+    float4x4 matrix;
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            matrix[j][i] = uniformMatrix[0].modelViewMatrixColumns[i][j];
+        }
+    }
+    return matrix;
+}
+
+vertex VertexOut myVertexShader(const    global Vertex*    vertexArray   [[buffer(0)]],
+                                const    global Uniforms*  uniforms      [[buffer(1)]],
+                                unsigned        int        vid           [[vertex_id]])
+{
+    float4x4 mv_Matrix = mv_MatrixFromUniformBuffer(uniforms);
+    
     VertexOut out;
-    out.position = vertexArray[vid].position;
+    out.position = mv_Matrix * vertexArray[vid].position;
     out.color = vertexArray[vid].color;
     return out;
 }

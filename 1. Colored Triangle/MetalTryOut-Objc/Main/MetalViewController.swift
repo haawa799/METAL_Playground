@@ -29,8 +29,6 @@ class MetalViewController: UIViewController,MetalViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var font = UIApplication.sharedApplication()
-
         metalView = self.view as? MetalView
         metalView.metalViewDelegate = self
         setupMetal()

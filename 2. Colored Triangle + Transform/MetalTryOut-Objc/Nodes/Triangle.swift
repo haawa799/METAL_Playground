@@ -19,6 +19,6 @@ import UIKit
         
         var verticesArray:Array<Vertex> = [A,B,C]
         
-        super.init(name: "Triangle", baseEffect: baseEffect, vertices: verticesArray, vertexCount:3)
+        super.init(name: "Triangle", baseEffect: baseEffect, vertices: verticesArray, vertexCount: 3)
     }
 }
