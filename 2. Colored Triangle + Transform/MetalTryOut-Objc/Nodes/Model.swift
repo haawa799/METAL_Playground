@@ -45,10 +45,11 @@ import QuartzCore
     
     func render(commandQueue: MTLCommandQueue, drawable: CAMetalDrawable, parentMVMatrix: AnyObject)
     {
-        var parentModelViewMatrix:Matrix4 = parentMVMatrix as Matrix4
-        var myModelViewMatrix:Matrix4 = modelMatrix() as Matrix4
+        var parentModelViewMatrix: Matrix4 = parentMVMatrix as Matrix4
+        var myModelViewMatrix: Matrix4 = modelMatrix() as Matrix4
         myModelViewMatrix.multiplyLeft(parentModelViewMatrix)
-        self.uniformsBuffer = generateUniformsBuffer(myModelViewMatrix, device: baseEffect.device)
+        var projectionMatrix: Matrix4 = baseEffect.projectionMatrix as Matrix4
+        self.uniformsBuffer = generateUniformsBuffer(myModelViewMatrix, projMatrix: projectionMatrix, device: baseEffect.device)
         
         var commandBuffer = commandQueue.commandBuffer()
         
@@ -57,7 +58,6 @@ import QuartzCore
         var renderPassDesc:MTLRenderPassDescriptor = MTLRenderPassDescriptor()
         renderPassDesc.colorAttachments[0].texture = drawable.texture
         renderPassDesc.colorAttachments[0].loadAction = MTLLoadAction.Clear
-//        renderPassDesc.colorAttachments[0].clearValue = MTLClearColor(red: 0.0, green: 104.0/255, blue: 55.0/255, alpha: 1)
         
         // Create MTLRenderCommandEncoder object which translates all states into a command for GPU
         var commandEncoder:MTLRenderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPassDesc)
@@ -92,10 +92,12 @@ import QuartzCore
         
     }
     
-    func generateUniformsBuffer(matrix: AnyObject, device: MTLDevice) -> MTLBuffer?
+    func generateUniformsBuffer(mvMatrix: AnyObject, projMatrix: AnyObject, device: MTLDevice) -> MTLBuffer?
     {
-        var m:Matrix4 = matrix as Matrix4
-        uniformsBuffer = UniformsBufferGenerator.generateUniformBuffer(m, device: device)
+        var mv:Matrix4 = mvMatrix as Matrix4
+        var proj:Matrix4 = projMatrix as Matrix4
+        
+        uniformsBuffer = UniformsBufferGenerator.generateUniformBufferProjectionMatrix(proj, modelViewMatrix: mv, device: device)
         return uniformsBuffer
     }
     

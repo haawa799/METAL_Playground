@@ -10,6 +10,21 @@
 
 @implementation Matrix4
 
++ (float)degreesToRad:(float)degrees
+{
+    return GLKMathDegreesToRadians(degrees);
+}
+
++ (Matrix4 *)makePerspectiveViewAngle:(float)angleRad
+                          aspectRatio:(float)aspect
+                                nearZ:(float)nearZ
+                                 farZ:(float)farZ
+{
+    Matrix4 *matrix = [[Matrix4 alloc] init];
+    matrix->glkMatrix = GLKMatrix4MakePerspective(angleRad, aspect, nearZ, farZ);
+    return matrix;
+}
+
 -(instancetype)init
 {
     self = [super init];

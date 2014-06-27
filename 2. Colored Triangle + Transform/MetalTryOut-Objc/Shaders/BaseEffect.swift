@@ -14,6 +14,7 @@ import Metal
     var device:MTLDevice
     var renderPipelineState:MTLRenderPipelineState?
     var pipeLineDescriptor:MTLRenderPipelineDescriptor
+    var projectionMatrix:AnyObject = Matrix4()
     
     init(device:MTLDevice ,vertexShaderName: String, fragmentShaderName:String)
     {
@@ -25,7 +26,6 @@ import Metal
         pipeLineDescriptor.vertexFunction = library.newFunctionWithName(vertexShaderName);
         pipeLineDescriptor.fragmentFunction = library.newFunctionWithName(fragmentShaderName);
         pipeLineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormat.FormatBGRA8Unorm;
-//        BaseEffectSfiftFixer.setup(pipeLineDescriptor)
         
         super.init()
     }

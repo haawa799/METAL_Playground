@@ -14,7 +14,8 @@
 
 @interface UniformsBufferGenerator : NSObject
 
-+ (id <MTLBuffer>)generateUniformBuffer:(Matrix4 *)matrix
-                                 device:(id <MTLDevice>)device;
++ (id <MTLBuffer>)generateUniformBufferProjectionMatrix:(Matrix4 *)projMatrix
+                                        modelViewMatrix:(Matrix4 *)mvMatrix
+                                                 device:(id <MTLDevice>)device;
 
 @end

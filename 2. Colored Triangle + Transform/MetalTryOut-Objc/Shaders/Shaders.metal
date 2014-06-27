@@ -11,6 +11,7 @@ using namespace metal;
 
 struct Uniforms{
     float4 modelViewMatrixColumns[4];
+    float4 projectionMatrixColumns[4];
 };
 
 struct Vertex{
@@ -31,7 +32,20 @@ float4x4 mv_MatrixFromUniformBuffer(constant Uniforms&  uniformMatrix)
     {
         for (int j = 0; j < 4; j++)
         {
-            matrix[j][i] = uniformMatrix.modelViewMatrixColumns[i][j];
+            matrix[j][i] = uniformMatrix.modelViewMatrixColumns[j][i];
+        }
+    }
+    return matrix;
+}
+
+float4x4 proj_MatrixFromUniformBuffer(constant Uniforms&  uniformMatrix)
+{
+    float4x4 matrix;
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            matrix[j][i] = uniformMatrix.projectionMatrixColumns[j][i];
         }
     }
     return matrix;
@@ -42,10 +56,11 @@ vertex VertexOut myVertexShader(const    global Vertex*    vertexArray   [[buffe
                                 unsigned        int        vid           [[vertex_id]])
 {
     float4x4 mv_Matrix = mv_MatrixFromUniformBuffer(uniforms);
+    float4x4 proj_Matrix = proj_MatrixFromUniformBuffer(uniforms);
     float4 position = vertexArray[vid].position;
     
     VertexOut out;
-    out.position = mv_Matrix * position;
+    out.position = proj_Matrix * mv_Matrix * position;
     out.color = vertexArray[vid].color;
     return out;
 }

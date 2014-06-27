@@ -16,16 +16,31 @@
     GLKMatrix4 glkMatrix;
 }
 
+//matrix->glkMatrix = GLKMatrix4MakePerspective(<#float fovyRadians#>, <#float aspect#>, <#float nearZ#>, <#float farZ#>)
+
++ (float)degreesToRad:(float)degrees;
+
++ (Matrix4 *)makePerspectiveViewAngle:(float)angleRad
+                          aspectRatio:(float)aspect
+                                nearZ:(float)nearZ
+                                 farZ:(float)farZ;
+
 - (void)transpose;
 
 - (void)normalize;
 
 - (void)multiplyLeft:(Matrix4 *)matrix;
 
-- (void)rotateAroundX:(float)xAngleRad y:(float)yAngleRad z:(float)zAngleRad;
+- (void)rotateAroundX:(float)xAngleRad
+                    y:(float)yAngleRad
+                    z:(float)zAngleRad;
 
-- (void)translate:(float)x y:(float)y z:(float)z;
+- (void)translate:(float)x
+                y:(float)y
+                z:(float)z;
 
-- (void)scale:(float)x y:(float)y z:(float)z;
+- (void)scale:(float)x
+            y:(float)y
+            z:(float)z;
 
 @end

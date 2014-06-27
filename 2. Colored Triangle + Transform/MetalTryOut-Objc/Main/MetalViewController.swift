@@ -49,6 +49,8 @@ class MetalViewController: UIViewController,MetalViewProtocol {
     func setupMetal(){
         commandQ = device.newCommandQueue()
         baseEffect = BaseEffect(device: device, vertexShaderName: "myVertexShader", fragmentShaderName: "myFragmentShader")
+        var ratio: Float = Float(self.view.bounds.size.width) / Float(self.view.bounds.size.height)
+        baseEffect.projectionMatrix = Matrix4.makePerspectiveViewAngle(Matrix4.degreesToRad(85.0), aspectRatio: ratio, nearZ: 1.0, farZ: 150.0)
         triangle = Triangle(baseEffect: baseEffect!)
         renderPipeline = baseEffect.compile()
     }
@@ -68,8 +70,7 @@ class MetalViewController: UIViewController,MetalViewProtocol {
         {
             var drawable = mLayer.newDrawable()
             var matrix: Matrix4 = Matrix4()
-            matrix.translate(0, y: -1, z: 0)
-//            triangle.render(commandQ, drawable: drawable, matrix)
+            matrix.translate(0, y: 0, z: -5)
             triangle.render(commandQ, drawable: drawable, parentMVMatrix: matrix)
         }
         

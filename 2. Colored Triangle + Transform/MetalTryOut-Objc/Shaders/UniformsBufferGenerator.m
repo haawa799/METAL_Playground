@@ -11,11 +11,27 @@
 
 @implementation UniformsBufferGenerator
 
-+ (id <MTLBuffer>)generateUniformBuffer:(Matrix4 *)matrix
-                                 device:(id <MTLDevice>)device
++ (id <MTLBuffer>)generateUniformBufferProjectionMatrix:(Matrix4 *)projMatrix
+                                        modelViewMatrix:(Matrix4 *)mvMatrix
+                                                 device:(id <MTLDevice>)device
 {
-    [matrix transpose];
-    id <MTLBuffer> uniformBuffer = [device newBufferWithBytes:matrix->glkMatrix.m length:sizeof(matrix->glkMatrix.m) options:0];
+    float buffer[32];
+    for (int k = 0; k < 2; k++)
+    {
+        for (int i = 0; i < 16; i++)
+        {
+            if(k == 0)
+            {
+                buffer[16*k + i] = mvMatrix->glkMatrix.m[i];
+            }
+            else
+            {
+                buffer[16*k + i] = projMatrix->glkMatrix.m[i];
+            }
+        }
+    }
+    
+    id <MTLBuffer> uniformBuffer = [device newBufferWithBytes:buffer length:sizeof(buffer) options:0];
     return uniformBuffer;
 }
 
