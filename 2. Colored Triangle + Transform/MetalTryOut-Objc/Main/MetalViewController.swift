@@ -50,6 +50,10 @@ class MetalViewController: UIViewController,MetalViewProtocol {
         commandQ = device.newCommandQueue()
         baseEffect = BaseEffect(device: device, vertexShaderName: "myVertexShader", fragmentShaderName: "myFragmentShader")
         triangle = Triangle(baseEffect: baseEffect!)
+//        triangle.scale = 0.5
+//        triangle.rotationZ = 1.5
+        triangle.position[2] = 1
+//        triangle.position[1] = 1
         renderPipeline = baseEffect.compile()
     }
     

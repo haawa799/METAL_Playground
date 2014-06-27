@@ -23,6 +23,7 @@
 		435244E3195AC56B00D62D63 /* VertexBufferGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 435244DF195AC56B00D62D63 /* VertexBufferGenerator.m */; };
 		435244E6195AC66800D62D63 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244E4195AC66800D62D63 /* Model.swift */; };
 		435244E7195AC66800D62D63 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244E5195AC66800D62D63 /* Triangle.swift */; };
+		437D5DA6195D649E003CCCF4 /* Matrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 437D5DA5195D649E003CCCF4 /* Matrix4.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,8 @@
 		435244DF195AC56B00D62D63 /* VertexBufferGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VertexBufferGenerator.m; sourceTree = "<group>"; };
 		435244E4195AC66800D62D63 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		435244E5195AC66800D62D63 /* Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		437D5DA4195D649E003CCCF4 /* Matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4.h; sourceTree = "<group>"; };
+		437D5DA5195D649E003CCCF4 /* Matrix4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix4.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				434418FD195C474100D73ACE /* Matrix4x4.swift */,
+				437D5DA4195D649E003CCCF4 /* Matrix4.h */,
+				437D5DA5195D649E003CCCF4 /* Matrix4.m */,
 				435244E4195AC66800D62D63 /* Model.swift */,
 				435244E5195AC66800D62D63 /* Triangle.swift */,
 			);
@@ -281,6 +286,7 @@
 				435244E2195AC56B00D62D63 /* Vertex.swift in Sources */,
 				435244E0195AC56B00D62D63 /* BaseEffect.swift in Sources */,
 				43441901195C478400D73ACE /* UniformsBufferGenerator.m in Sources */,
+				437D5DA6195D649E003CCCF4 /* Matrix4.m in Sources */,
 				435244E7195AC66800D62D63 /* Triangle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,7 +397,7 @@
 				OTHER_SWIFT_FLAGS = "-Ofast";
 				PRODUCT_NAME = Triangle;
 				SWIFT_OBJC_BRIDGING_HEADER = "MetalTryOut-Objc/Triangle-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Ofast";
 			};
 			name = Debug;
 		};
@@ -406,6 +412,7 @@
 				OTHER_SWIFT_FLAGS = "-Ofast";
 				PRODUCT_NAME = Triangle;
 				SWIFT_OBJC_BRIDGING_HEADER = "MetalTryOut-Objc/Triangle-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Ofast";
 			};
 			name = Release;
 		};

@@ -11,13 +11,13 @@
 
 @implementation UniformsBufferGenerator
 
-+ (id <MTLBuffer>)generateUniformBuffer:(Matrix4x4 *)matrix
++ (id <MTLBuffer>)generateUniformBuffer:(Matrix4 *)matrix
                                  device:(id <MTLDevice>)device
 {
     float matrixData[16];
     for (int i = 0; i < 16; i++)
     {
-        matrixData[i] = [matrix.grid[i] floatValue];
+        matrixData[i] = matrix->mat[i];
     }
     
     id <MTLBuffer> uniformBuffer = [device newBufferWithBytes:matrixData length:sizeof(matrixData) options:0];

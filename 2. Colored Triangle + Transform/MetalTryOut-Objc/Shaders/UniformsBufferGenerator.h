@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <Metal/Metal.h>
+#import "Matrix4.h"
 
 @class Matrix4x4;
 
 @interface UniformsBufferGenerator : NSObject
 
-+ (id <MTLBuffer>)generateUniformBuffer:(Matrix4x4 *)matrix
++ (id <MTLBuffer>)generateUniformBuffer:(Matrix4 *)matrix
                                  device:(id <MTLDevice>)device;
 
 @end

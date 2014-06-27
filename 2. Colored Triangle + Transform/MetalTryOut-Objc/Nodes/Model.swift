@@ -16,6 +16,13 @@ import QuartzCore
     let name: String
     var vertexCount: Int
     
+    var position: Float[] = Array(count: 4, repeatedValue: 0.0)
+    var rotationX:Float = 0.0
+    var rotationY:Float = 0.0
+    var rotationZ:Float = 0.0
+    var scale:Float     = 1.0
+    
+    
     var vertexBuffer: MTLBuffer?
     var uniformsBuffer: MTLBuffer?
     
@@ -24,6 +31,7 @@ import QuartzCore
         vertices: Array<Vertex>,
         vertexCount: Int)
     {
+        position[3] = 1.0
         self.name = name
         self.baseEffect = baseEffect
         self.vertexCount = vertexCount
@@ -31,12 +39,12 @@ import QuartzCore
         super.init()
         
         self.vertexBuffer = generateVertexBuffer(vertices, vertexCount: vertexCount, device: baseEffect.device)
-        var m = Matrix4x4()
-        self.uniformsBuffer = generateUniformsBuffer(m, device: baseEffect.device)
     }
     
     func render(commandQueue: MTLCommandQueue, drawable: CAMetalDrawable)
     {
+        self.uniformsBuffer = generateUniformsBuffer(modelMatrix(), device: baseEffect.device)
+        
         var commandBuffer = commandQueue.commandBuffer()
         
         
@@ -65,9 +73,21 @@ import QuartzCore
         
     }
     
-    func generateUniformsBuffer(matrix: Matrix4x4, device: MTLDevice) -> MTLBuffer?
+    func modelMatrix() -> AnyObject
     {
-        uniformsBuffer = UniformsBufferGenerator.generateUniformBuffer(matrix, device: device)
+        var matrix = Matrix4()
+        matrix.translate(position[0], y: position[1], z: position[2])
+        matrix.rotateAroundX(rotationX)
+        matrix.rotateAroundY(rotationY)
+        matrix.rotateAroundZ(rotationZ)
+        matrix.scale(scale, y: scale, z: scale)
+        return matrix
+    }
+    
+    func generateUniformsBuffer(matrix: AnyObject, device: MTLDevice) -> MTLBuffer?
+    {
+        var m:Matrix4 = matrix as Matrix4
+        uniformsBuffer = UniformsBufferGenerator.generateUniformBuffer(m, device: device)
         return uniformsBuffer
     }
     

@@ -72,6 +72,7 @@ import QuartzCore
     func setup(){
         fpsLabel = UILabel(frame: CGRectZero)
         fpsLabel!.setTranslatesAutoresizingMaskIntoConstraints(false)
+        fpsLabel!.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.6)
         self.addSubview(fpsLabel)
         
         displayLink = CADisplayLink(target: self, selector: Selector.convertFromStringLiteral("drawCall:"))
