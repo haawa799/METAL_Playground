@@ -14,102 +14,45 @@
 {
     self = [super init];
     if(self != nil)
-    {
-        mat[0]=1.0f;
-        mat[5]=1.0f;
-        mat[10]=1.0f;
-        mat[15]=1.0f;
+    {        
+        glkMatrix = GLKMatrix4Identity;
     }
     return self;
 }
 
 -(void)transpose
 {
-    float tmp[16];
-    int i,j;
-    for(i=0;i<4;i++) {
-        for(j=0;j<4;j++) {
-            tmp[4*i+j] = mat[i+4*j];
-        }
-    }
-    for(i=0;i<16;i++)
-        mat[i] = tmp[i];
+    glkMatrix = GLKMatrix4Transpose(glkMatrix);
 }
 
--(void)multiplyMatrix:(Matrix4 *)m
+- (void)normalize
 {
-    float tmp[4];
-    for (int j=0; j<4; j++) {
-        tmp[0] = mat[j];
-        tmp[1] = mat[4+j];
-        tmp[2] = mat[8+j];
-        tmp[3] = mat[12+j];
-        for (int i=0; i<4; i++)
-        {
-            mat[4*i+j] = m->mat[4*i ]*tmp[0] + m->mat[4*i+1]*tmp[1] + m->mat[4*i+2]*tmp[2] + m->mat[4*i+3]*tmp[3];
-        }
-    }
+//    glkMatrix = glkMatrix4
 }
 
--(void)rotateAroundX:(float)angleRad
+- (void)multiplyLeft:(Matrix4 *)matrix
 {
-    Matrix4 *m = [[Matrix4 alloc] init];                    // create identity matrix
-    
-    m->mat[ 0] = 1.0;
-    m->mat[ 5] = cosf(angleRad);
-    m->mat[10] = m->mat[5];
-    m->mat[ 6] = sinf(angleRad);
-    m->mat[ 9] = -m->mat[6];
-    
-    [self multiplyMatrix:m];
+    glkMatrix = GLKMatrix4Multiply(matrix->glkMatrix, glkMatrix);
 }
 
--(void)rotateAroundY:(float)angleRad
+- (void)rotateAroundX:(float)xAngleRad y:(float)yAngleRad z:(float)zAngleRad
 {
-    Matrix4 *m = [[Matrix4 alloc] init];                    // create identity matrix
-    
-    m->mat[ 0] = cosf(angleRad);
-    m->mat[ 5] = 1.0;
-    m->mat[10] = m->mat[0];
-    m->mat[ 2] = -sinf(angleRad);
-    m->mat[ 8] = -m->mat[2];
-    
-    [self multiplyMatrix:m];
+    glkMatrix = GLKMatrix4Rotate(glkMatrix, xAngleRad, 1, 0, 0);
+    glkMatrix = GLKMatrix4Rotate(glkMatrix, yAngleRad, 0, 1, 0);
+    glkMatrix = GLKMatrix4Rotate(glkMatrix, zAngleRad, 0, 0, 1);
 }
 
--(void)rotateAroundZ:(float)angleRad
-{
-    Matrix4 *m = [[Matrix4 alloc] init];                    // create identity matrix
-    
-    m->mat[ 0] = cosf(angleRad);
-    m->mat[ 5] = m->mat[0];
-    m->mat[10] =  1.0;
-    m->mat[ 1] = sinf(angleRad);
-    m->mat[ 4] = -m->mat[1];
-    
-    [self multiplyMatrix:m];
-}
+
 
 -(void)translate:(float)x y:(float)y z:(float)z
 {
-    Matrix4 *m = [[Matrix4 alloc] init]; // create identity matrix
-    
-    m->mat[12] = x;
-    m->mat[13] = y;
-    m->mat[14] = z;
-    
-    [self multiplyMatrix:m];
+    glkMatrix = GLKMatrix4Translate(glkMatrix, x, y, z);
 }
 
 -(void)scale:(float)x y:(float)y z:(float)z
 {
-    Matrix4 *m = [[Matrix4 alloc] init]; // create identity matrix
-    
-    m->mat[0] = x;
-    m->mat[5] = y;
-    m->mat[10] = z;
-    
-    [self multiplyMatrix:m];
+    glkMatrix = GLKMatrix4Scale(glkMatrix, x, y, z);
 }
+
 
 @end

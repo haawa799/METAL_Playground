@@ -16,7 +16,10 @@ import QuartzCore
     let name: String
     var vertexCount: Int
     
-    var position: Float[] = Array(count: 4, repeatedValue: 0.0)
+    var positionX:Float = 0.0
+    var positionY:Float = 0.0
+    var positionZ:Float = 0.0
+    
     var rotationX:Float = 0.0
     var rotationY:Float = 0.0
     var rotationZ:Float = 0.0
@@ -31,7 +34,6 @@ import QuartzCore
         vertices: Array<Vertex>,
         vertexCount: Int)
     {
-        position[3] = 1.0
         self.name = name
         self.baseEffect = baseEffect
         self.vertexCount = vertexCount
@@ -41,9 +43,12 @@ import QuartzCore
         self.vertexBuffer = generateVertexBuffer(vertices, vertexCount: vertexCount, device: baseEffect.device)
     }
     
-    func render(commandQueue: MTLCommandQueue, drawable: CAMetalDrawable)
+    func render(commandQueue: MTLCommandQueue, drawable: CAMetalDrawable, parentMVMatrix: AnyObject)
     {
-        self.uniformsBuffer = generateUniformsBuffer(modelMatrix(), device: baseEffect.device)
+        var parentModelViewMatrix:Matrix4 = parentMVMatrix as Matrix4
+        var myModelViewMatrix:Matrix4 = modelMatrix() as Matrix4
+        myModelViewMatrix.multiplyLeft(parentModelViewMatrix)
+        self.uniformsBuffer = generateUniformsBuffer(myModelViewMatrix, device: baseEffect.device)
         
         var commandBuffer = commandQueue.commandBuffer()
         
@@ -76,12 +81,15 @@ import QuartzCore
     func modelMatrix() -> AnyObject
     {
         var matrix = Matrix4()
-        matrix.translate(position[0], y: position[1], z: position[2])
-        matrix.rotateAroundX(rotationX)
-        matrix.rotateAroundY(rotationY)
-        matrix.rotateAroundZ(rotationZ)
+        matrix.translate(positionX, y: positionY, z: positionZ)
+        matrix.rotateAroundX(rotationX, y: rotationY, z: rotationZ)
         matrix.scale(scale, y: scale, z: scale)
         return matrix
+    }
+    
+    func updateWithDelta(delta: CFTimeInterval)
+    {
+        
     }
     
     func generateUniformsBuffer(matrix: AnyObject, device: MTLDevice) -> MTLBuffer?

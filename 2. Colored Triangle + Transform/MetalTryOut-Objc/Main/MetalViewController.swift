@@ -50,10 +50,6 @@ class MetalViewController: UIViewController,MetalViewProtocol {
         commandQ = device.newCommandQueue()
         baseEffect = BaseEffect(device: device, vertexShaderName: "myVertexShader", fragmentShaderName: "myFragmentShader")
         triangle = Triangle(baseEffect: baseEffect!)
-//        triangle.scale = 0.5
-//        triangle.rotationZ = 1.5
-        triangle.position[2] = 1
-//        triangle.position[1] = 1
         renderPipeline = baseEffect.compile()
     }
     
@@ -71,7 +67,12 @@ class MetalViewController: UIViewController,MetalViewProtocol {
         if let mLayer = metalLayer
         {
             var drawable = mLayer.newDrawable()
-            triangle.render(commandQ, drawable: drawable)
+            var matrix: Matrix4 = Matrix4()
+            matrix.translate(0, y: -1, z: 0)
+//            triangle.render(commandQ, drawable: drawable, matrix)
+            triangle.render(commandQ, drawable: drawable, parentMVMatrix: matrix)
         }
+        
+        triangle.updateWithDelta(delta)
     }
 }

@@ -14,14 +14,8 @@
 + (id <MTLBuffer>)generateUniformBuffer:(Matrix4 *)matrix
                                  device:(id <MTLDevice>)device
 {
-    float matrixData[16];
-    for (int i = 0; i < 16; i++)
-    {
-        matrixData[i] = matrix->mat[i];
-    }
-    
-    id <MTLBuffer> uniformBuffer = [device newBufferWithBytes:matrixData length:sizeof(matrixData) options:0];
-    
+    [matrix transpose];
+    id <MTLBuffer> uniformBuffer = [device newBufferWithBytes:matrix->glkMatrix.m length:sizeof(matrix->glkMatrix.m) options:0];
     return uniformBuffer;
 }
 

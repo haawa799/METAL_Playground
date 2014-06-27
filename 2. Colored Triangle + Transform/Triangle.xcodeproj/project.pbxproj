@@ -11,7 +11,6 @@
 		434418FE195C474100D73ACE /* Matrix4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434418FD195C474100D73ACE /* Matrix4x4.swift */; };
 		43441901195C478400D73ACE /* UniformsBufferGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 43441900195C478400D73ACE /* UniformsBufferGenerator.m */; };
 		43479286195AC83E00FA2962 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43479282195AC83E00FA2962 /* Images.xcassets */; };
-		43479287195AC83E00FA2962 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43479283195AC83E00FA2962 /* Info.plist */; };
 		43479288195AC83E00FA2962 /* screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 43479284195AC83E00FA2962 /* screenshot.png */; };
 		435244D6195AC04000D62D63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244D2195AC04000D62D63 /* AppDelegate.swift */; };
 		435244D7195AC04000D62D63 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244D3195AC04000D62D63 /* MetalView.swift */; };
@@ -255,7 +254,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43479287195AC83E00FA2962 /* Info.plist in Resources */,
 				43479286195AC83E00FA2962 /* Images.xcassets in Resources */,
 				435244E1195AC56B00D62D63 /* Shaders.metal in Resources */,
 				435244D9195AC04000D62D63 /* Storyboard.storyboard in Resources */,
