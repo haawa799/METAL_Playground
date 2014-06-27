@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4304BFCA195455A800326016"
-               BuildableName = "Triangle.app"
-               BlueprintName = "Triangle"
-               ReferencedContainer = "container:Triangle.xcodeproj">
+               BuildableName = "Cube+Transform.app"
+               BlueprintName = "Cube+Transform"
+               ReferencedContainer = "container:Cube+Transform.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4304BFE0195455A800326016"
-               BuildableName = "TriangleTests.xctest"
-               BlueprintName = "TriangleTests"
-               ReferencedContainer = "container:Triangle.xcodeproj">
+               BuildableName = "Cube+TransformTests.xctest"
+               BlueprintName = "Cube+TransformTests"
+               ReferencedContainer = "container:Cube+Transform.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4304BFCA195455A800326016"
-            BuildableName = "Triangle.app"
-            BlueprintName = "Triangle"
-            ReferencedContainer = "container:Triangle.xcodeproj">
+            BuildableName = "Cube+Transform.app"
+            BlueprintName = "Cube+Transform"
+            ReferencedContainer = "container:Cube+Transform.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4304BFCA195455A800326016"
-            BuildableName = "Triangle.app"
-            BlueprintName = "Triangle"
-            ReferencedContainer = "container:Triangle.xcodeproj">
+            BuildableName = "Cube+Transform.app"
+            BlueprintName = "Cube+Transform"
+            ReferencedContainer = "container:Cube+Transform.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "4304BFCA195455A800326016"
-            BuildableName = "Triangle.app"
-            BlueprintName = "Triangle"
-            ReferencedContainer = "container:Triangle.xcodeproj">
+            BuildableName = "Cube+Transform.app"
+            BlueprintName = "Cube+Transform"
+            ReferencedContainer = "container:Cube+Transform.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

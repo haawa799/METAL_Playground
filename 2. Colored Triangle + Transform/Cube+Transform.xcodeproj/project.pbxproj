@@ -23,6 +23,8 @@
 		435244E6195AC66800D62D63 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244E4195AC66800D62D63 /* Model.swift */; };
 		435244E7195AC66800D62D63 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244E5195AC66800D62D63 /* Triangle.swift */; };
 		437D5DA6195D649E003CCCF4 /* Matrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 437D5DA5195D649E003CCCF4 /* Matrix4.m */; };
+		43AD54BD195DAFB600C43C20 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD54BC195DAFB600C43C20 /* Square.swift */; };
+		43AD54BF195DB1E300C43C20 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD54BE195DB1E300C43C20 /* Cube.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		4304BFCB195455A800326016 /* Triangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Triangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4304BFE1195455A800326016 /* TriangleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TriangleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4304BFCB195455A800326016 /* Cube+Transform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cube+Transform.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4304BFE1195455A800326016 /* Cube+TransformTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cube+TransformTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4304BFE6195455A800326016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4304BFE7195455A800326016 /* MetalTryOut_ObjcTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetalTryOut_ObjcTests.m; sourceTree = "<group>"; };
 		434418FD195C474100D73ACE /* Matrix4x4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix4x4.swift; sourceTree = "<group>"; };
@@ -60,6 +62,8 @@
 		435244E5195AC66800D62D63 /* Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		437D5DA4195D649E003CCCF4 /* Matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4.h; sourceTree = "<group>"; };
 		437D5DA5195D649E003CCCF4 /* Matrix4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix4.m; sourceTree = "<group>"; };
+		43AD54BC195DAFB600C43C20 /* Square.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
+		43AD54BE195DB1E300C43C20 /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,8 +96,8 @@
 		4304BFCC195455A800326016 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4304BFCB195455A800326016 /* Triangle.app */,
-				4304BFE1195455A800326016 /* TriangleTests.xctest */,
+				4304BFCB195455A800326016 /* Cube+Transform.app */,
+				4304BFE1195455A800326016 /* Cube+TransformTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,6 +173,8 @@
 				437D5DA4195D649E003CCCF4 /* Matrix4.h */,
 				437D5DA5195D649E003CCCF4 /* Matrix4.m */,
 				435244E4195AC66800D62D63 /* Model.swift */,
+				43AD54BE195DB1E300C43C20 /* Cube.swift */,
+				43AD54BC195DAFB600C43C20 /* Square.swift */,
 				435244E5195AC66800D62D63 /* Triangle.swift */,
 			);
 			path = Nodes;
@@ -177,9 +183,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4304BFCA195455A800326016 /* Triangle */ = {
+		4304BFCA195455A800326016 /* Cube+Transform */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4304BFEB195455A800326016 /* Build configuration list for PBXNativeTarget "Triangle" */;
+			buildConfigurationList = 4304BFEB195455A800326016 /* Build configuration list for PBXNativeTarget "Cube+Transform" */;
 			buildPhases = (
 				4304BFC7195455A800326016 /* Sources */,
 				4304BFC8195455A800326016 /* Frameworks */,
@@ -189,14 +195,14 @@
 			);
 			dependencies = (
 			);
-			name = Triangle;
+			name = "Cube+Transform";
 			productName = "MetalTryOut-Objc";
-			productReference = 4304BFCB195455A800326016 /* Triangle.app */;
+			productReference = 4304BFCB195455A800326016 /* Cube+Transform.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4304BFE0195455A800326016 /* TriangleTests */ = {
+		4304BFE0195455A800326016 /* Cube+TransformTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4304BFEE195455A800326016 /* Build configuration list for PBXNativeTarget "TriangleTests" */;
+			buildConfigurationList = 4304BFEE195455A800326016 /* Build configuration list for PBXNativeTarget "Cube+TransformTests" */;
 			buildPhases = (
 				4304BFDD195455A800326016 /* Sources */,
 				4304BFDE195455A800326016 /* Frameworks */,
@@ -207,9 +213,9 @@
 			dependencies = (
 				4304BFE3195455A800326016 /* PBXTargetDependency */,
 			);
-			name = TriangleTests;
+			name = "Cube+TransformTests";
 			productName = "MetalTryOut-ObjcTests";
-			productReference = 4304BFE1195455A800326016 /* TriangleTests.xctest */;
+			productReference = 4304BFE1195455A800326016 /* Cube+TransformTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -230,7 +236,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4304BFC6195455A800326016 /* Build configuration list for PBXProject "Triangle" */;
+			buildConfigurationList = 4304BFC6195455A800326016 /* Build configuration list for PBXProject "Cube+Transform" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -243,8 +249,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4304BFCA195455A800326016 /* Triangle */,
-				4304BFE0195455A800326016 /* TriangleTests */,
+				4304BFCA195455A800326016 /* Cube+Transform */,
+				4304BFE0195455A800326016 /* Cube+TransformTests */,
 			);
 		};
 /* End PBXProject section */
@@ -275,12 +281,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43AD54BD195DAFB600C43C20 /* Square.swift in Sources */,
 				435244E6195AC66800D62D63 /* Model.swift in Sources */,
 				434418FE195C474100D73ACE /* Matrix4x4.swift in Sources */,
 				435244D6195AC04000D62D63 /* AppDelegate.swift in Sources */,
 				435244E3195AC56B00D62D63 /* VertexBufferGenerator.m in Sources */,
 				435244D7195AC04000D62D63 /* MetalView.swift in Sources */,
 				435244D8195AC04000D62D63 /* MetalViewController.swift in Sources */,
+				43AD54BF195DB1E300C43C20 /* Cube.swift in Sources */,
 				435244E2195AC56B00D62D63 /* Vertex.swift in Sources */,
 				435244E0195AC56B00D62D63 /* BaseEffect.swift in Sources */,
 				43441901195C478400D73ACE /* UniformsBufferGenerator.m in Sources */,
@@ -302,7 +310,7 @@
 /* Begin PBXTargetDependency section */
 		4304BFE3195455A800326016 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4304BFCA195455A800326016 /* Triangle */;
+			target = 4304BFCA195455A800326016 /* Cube+Transform */;
 			targetProxy = 4304BFE2195455A800326016 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -393,7 +401,7 @@
 				INFOPLIST_FILE = "MetalTryOut-Objc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-Ofast";
-				PRODUCT_NAME = Triangle;
+				PRODUCT_NAME = "Cube+Transform";
 				SWIFT_OBJC_BRIDGING_HEADER = "MetalTryOut-Objc/Triangle-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Ofast";
 			};
@@ -408,7 +416,7 @@
 				INFOPLIST_FILE = "MetalTryOut-Objc/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-Ofast";
-				PRODUCT_NAME = Triangle;
+				PRODUCT_NAME = "Cube+Transform";
 				SWIFT_OBJC_BRIDGING_HEADER = "MetalTryOut-Objc/Triangle-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Ofast";
 			};
@@ -429,7 +437,7 @@
 				INFOPLIST_FILE = "MetalTryOut-ObjcTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = TriangleTests;
+				PRODUCT_NAME = "Cube+TransformTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -445,7 +453,7 @@
 				INFOPLIST_FILE = "MetalTryOut-ObjcTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = TriangleTests;
+				PRODUCT_NAME = "Cube+TransformTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -453,7 +461,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4304BFC6195455A800326016 /* Build configuration list for PBXProject "Triangle" */ = {
+		4304BFC6195455A800326016 /* Build configuration list for PBXProject "Cube+Transform" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4304BFE9195455A800326016 /* Debug */,
@@ -462,7 +470,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4304BFEB195455A800326016 /* Build configuration list for PBXNativeTarget "Triangle" */ = {
+		4304BFEB195455A800326016 /* Build configuration list for PBXNativeTarget "Cube+Transform" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4304BFEC195455A800326016 /* Debug */,
@@ -471,7 +479,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4304BFEE195455A800326016 /* Build configuration list for PBXNativeTarget "TriangleTests" */ = {
+		4304BFEE195455A800326016 /* Build configuration list for PBXNativeTarget "Cube+TransformTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4304BFEF195455A800326016 /* Debug */,

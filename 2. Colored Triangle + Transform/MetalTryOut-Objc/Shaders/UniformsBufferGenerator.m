@@ -7,7 +7,7 @@
 //
 
 #import "UniformsBufferGenerator.h"
-#import "Triangle-Swift.h"
+#import "Cube_Transform-Swift.h"
 
 @implementation UniformsBufferGenerator
 

@@ -12,6 +12,8 @@ import QuartzCore
 
 @objc class Model: NSObject
 {
+    var time:CFTimeInterval = 0.0
+    
     var baseEffect: BaseEffect
     let name: String
     var vertexCount: Int
@@ -64,6 +66,7 @@ import QuartzCore
         commandEncoder.setRenderPipelineState(baseEffect.renderPipelineState)
         commandEncoder.setVertexBuffer(vertexBuffer, offset: 0, atIndex: 0)
         commandEncoder.setVertexBuffer(uniformsBuffer, offset: 0, atIndex: 1)
+        commandEncoder.setCullMode(MTLCullMode.Front)
         commandEncoder.drawPrimitives(MTLPrimitiveType.Triangle, vertexStart: 0, vertexCount: vertexCount);
         commandEncoder.endEncoding();
         
@@ -78,7 +81,7 @@ import QuartzCore
         
     }
     
-    func modelMatrix() -> AnyObject
+    func modelMatrix() -> AnyObject //AnyObject is used as a workaround against comiler error, waiting for fix in following betas
     {
         var matrix = Matrix4()
         matrix.translate(positionX, y: positionY, z: positionZ)
@@ -89,8 +92,10 @@ import QuartzCore
     
     func updateWithDelta(delta: CFTimeInterval)
     {
-        
+        time += delta
     }
+    
+    // Two following methods are used as a glue for Objective-C buffer generator code and Swift code
     
     func generateUniformsBuffer(mvMatrix: AnyObject, projMatrix: AnyObject, device: MTLDevice) -> MTLBuffer?
     {
