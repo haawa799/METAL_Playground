@@ -10,3 +10,5 @@ NOTE:
 1) For now (Xcode 6 - beta2) requires -Ofast compiler flag to build
 
 2) iOS 8 and device with A7 required! Doesn't work on simulator.
+
+![alt tag](http://cl.ly/image/2r2G2H2p300z/IMG_1160.PNG)   ![alt tag](http://cl.ly/image/1b2t3s3c3g0X/IMG_1166.PNG)
