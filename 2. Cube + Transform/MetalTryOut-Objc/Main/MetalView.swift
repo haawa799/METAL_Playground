@@ -63,7 +63,7 @@ import QuartzCore
         var rightConstraint = NSLayoutConstraint(item: fpsLabel, attribute: .Right, relatedBy: .Equal, toItem: self, attribute: .Right, multiplier: 1.0, constant: 0.0)
         var botConstraint = NSLayoutConstraint(item: fpsLabel, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1.0, constant: 0.0)
         var heightConstraint = NSLayoutConstraint(item: fpsLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 25.0)
-        var widthConstraint = NSLayoutConstraint(item: fpsLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 85.0)
+        var widthConstraint = NSLayoutConstraint(item: fpsLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 60.0)
         
         self.addConstraints([rightConstraint,botConstraint,widthConstraint,heightConstraint])
         super.layoutSubviews()
@@ -88,7 +88,7 @@ import QuartzCore
         
         if fpsLabel?.hidden == false{
             var fps = 1.0 / elapsed
-            fpsLabel!.text = "fps: \(fps)"
+            fpsLabel!.text = "fps: \(Int(fps))"
         }
         lastFrameTimestamp = displayLink.timestamp
         

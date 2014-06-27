@@ -10,13 +10,13 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKMath.h>
 
+// Wraper around GLKMath's GLKMatrix4, becouse we can't use it directly from Swift code
+
 @interface Matrix4 : NSObject
 {
     @public
     GLKMatrix4 glkMatrix;
 }
-
-//matrix->glkMatrix = GLKMatrix4MakePerspective(<#float fovyRadians#>, <#float aspect#>, <#float nearZ#>, <#float farZ#>)
 
 + (float)degreesToRad:(float)degrees;
 
@@ -26,8 +26,6 @@
                                  farZ:(float)farZ;
 
 - (void)transpose;
-
-- (void)normalize;
 
 - (void)multiplyLeft:(Matrix4 *)matrix;
 

@@ -40,10 +40,6 @@
     glkMatrix = GLKMatrix4Transpose(glkMatrix);
 }
 
-- (void)normalize
-{
-//    glkMatrix = glkMatrix4
-}
 
 - (void)multiplyLeft:(Matrix4 *)matrix
 {
