@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4304BFE8195455A800326016 /* MetalTryOut_ObjcTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4304BFE7195455A800326016 /* MetalTryOut_ObjcTests.m */; };
+		434418FE195C474100D73ACE /* Matrix4x4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434418FD195C474100D73ACE /* Matrix4x4.swift */; };
+		43441901195C478400D73ACE /* UniformsBufferGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 43441900195C478400D73ACE /* UniformsBufferGenerator.m */; };
+		43479286195AC83E00FA2962 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43479282195AC83E00FA2962 /* Images.xcassets */; };
+		43479288195AC83E00FA2962 /* screenshot.png in Resources */ = {isa = PBXBuildFile; fileRef = 43479284195AC83E00FA2962 /* screenshot.png */; };
+		435244D6195AC04000D62D63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244D2195AC04000D62D63 /* AppDelegate.swift */; };
+		435244D7195AC04000D62D63 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244D3195AC04000D62D63 /* MetalView.swift */; };
+		435244D8195AC04000D62D63 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244D4195AC04000D62D63 /* MetalViewController.swift */; };
+		435244D9195AC04000D62D63 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 435244D5195AC04000D62D63 /* Storyboard.storyboard */; };
+		435244E0195AC56B00D62D63 /* BaseEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244DB195AC56B00D62D63 /* BaseEffect.swift */; };
+		435244E1195AC56B00D62D63 /* Shaders.metal in Resources */ = {isa = PBXBuildFile; fileRef = 435244DC195AC56B00D62D63 /* Shaders.metal */; };
+		435244E2195AC56B00D62D63 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244DD195AC56B00D62D63 /* Vertex.swift */; };
+		435244E3195AC56B00D62D63 /* VertexBufferGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 435244DF195AC56B00D62D63 /* VertexBufferGenerator.m */; };
+		435244E6195AC66800D62D63 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244E4195AC66800D62D63 /* Model.swift */; };
+		435244E7195AC66800D62D63 /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244E5195AC66800D62D63 /* Triangle.swift */; };
+		437D5DA6195D649E003CCCF4 /* Matrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 437D5DA5195D649E003CCCF4 /* Matrix4.m */; };
+		43AD54BD195DAFB600C43C20 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD54BC195DAFB600C43C20 /* Square.swift */; };
+		43AD54BF195DB1E300C43C20 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD54BE195DB1E300C43C20 /* Cube.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4304BFE2195455A800326016 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4304BFC3195455A800326016 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4304BFCA195455A800326016;
+			remoteInfo = "MetalTryOut-Objc";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4304BFCB195455A800326016 /* Textured Cube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Textured Cube.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4304BFE1195455A800326016 /* Textured CubeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Textured CubeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4304BFE6195455A800326016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4304BFE7195455A800326016 /* MetalTryOut_ObjcTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MetalTryOut_ObjcTests.m; sourceTree = "<group>"; };
+		434418FD195C474100D73ACE /* Matrix4x4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matrix4x4.swift; sourceTree = "<group>"; };
+		434418FF195C478400D73ACE /* UniformsBufferGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniformsBufferGenerator.h; sourceTree = "<group>"; };
+		43441900195C478400D73ACE /* UniformsBufferGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniformsBufferGenerator.m; sourceTree = "<group>"; };
+		43479282195AC83E00FA2962 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		43479283195AC83E00FA2962 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43479284195AC83E00FA2962 /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
+		43479285195AC83E00FA2962 /* Triangle-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Triangle-Bridging-Header.h"; sourceTree = "<group>"; };
+		435244D2195AC04000D62D63 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		435244D3195AC04000D62D63 /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
+		435244D4195AC04000D62D63 /* MetalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
+		435244D5195AC04000D62D63 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		435244DB195AC56B00D62D63 /* BaseEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseEffect.swift; sourceTree = "<group>"; };
+		435244DC195AC56B00D62D63 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		435244DD195AC56B00D62D63 /* Vertex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
+		435244DE195AC56B00D62D63 /* VertexBufferGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VertexBufferGenerator.h; sourceTree = "<group>"; };
+		435244DF195AC56B00D62D63 /* VertexBufferGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VertexBufferGenerator.m; sourceTree = "<group>"; };
+		435244E4195AC66800D62D63 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		435244E5195AC66800D62D63 /* Triangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
+		437D5DA4195D649E003CCCF4 /* Matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4.h; sourceTree = "<group>"; };
+		437D5DA5195D649E003CCCF4 /* Matrix4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix4.m; sourceTree = "<group>"; };
+		43AD54BC195DAFB600C43C20 /* Square.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
+		43AD54BE195DB1E300C43C20 /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4304BFC8195455A800326016 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4304BFDE195455A800326016 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4304BFC2195455A800326016 = {
+			isa = PBXGroup;
+			children = (
+				4304BFCD195455A800326016 /* MetalTryOut-Objc */,
+				4304BFE4195455A800326016 /* MetalTryOut-ObjcTests */,
+				4304BFCC195455A800326016 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4304BFCC195455A800326016 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4304BFCB195455A800326016 /* Textured Cube.app */,
+				4304BFE1195455A800326016 /* Textured CubeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4304BFCD195455A800326016 /* MetalTryOut-Objc */ = {
+			isa = PBXGroup;
+			children = (
+				43479281195AC82A00FA2962 /* Supporting files */,
+				435244DA195AC06A00D62D63 /* Nodes */,
+				435244D0195ABFFF00D62D63 /* Main */,
+				435244D1195ABFFF00D62D63 /* Shaders */,
+			);
+			path = "MetalTryOut-Objc";
+			sourceTree = "<group>";
+		};
+		4304BFE4195455A800326016 /* MetalTryOut-ObjcTests */ = {
+			isa = PBXGroup;
+			children = (
+				4304BFE7195455A800326016 /* MetalTryOut_ObjcTests.m */,
+				4304BFE5195455A800326016 /* Supporting Files */,
+			);
+			path = "MetalTryOut-ObjcTests";
+			sourceTree = "<group>";
+		};
+		4304BFE5195455A800326016 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4304BFE6195455A800326016 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43479281195AC82A00FA2962 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				43479282195AC83E00FA2962 /* Images.xcassets */,
+				43479283195AC83E00FA2962 /* Info.plist */,
+				43479284195AC83E00FA2962 /* screenshot.png */,
+				43479285195AC83E00FA2962 /* Triangle-Bridging-Header.h */,
+			);
+			name = "Supporting files";
+			sourceTree = "<group>";
+		};
+		435244D0195ABFFF00D62D63 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				435244D2195AC04000D62D63 /* AppDelegate.swift */,
+				435244D3195AC04000D62D63 /* MetalView.swift */,
+				435244D4195AC04000D62D63 /* MetalViewController.swift */,
+				435244D5195AC04000D62D63 /* Storyboard.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		435244D1195ABFFF00D62D63 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				435244DB195AC56B00D62D63 /* BaseEffect.swift */,
+				435244DC195AC56B00D62D63 /* Shaders.metal */,
+				435244DD195AC56B00D62D63 /* Vertex.swift */,
+				435244DE195AC56B00D62D63 /* VertexBufferGenerator.h */,
+				435244DF195AC56B00D62D63 /* VertexBufferGenerator.m */,
+				434418FF195C478400D73ACE /* UniformsBufferGenerator.h */,
+				43441900195C478400D73ACE /* UniformsBufferGenerator.m */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		435244DA195AC06A00D62D63 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				434418FD195C474100D73ACE /* Matrix4x4.swift */,
+				437D5DA4195D649E003CCCF4 /* Matrix4.h */,
+				437D5DA5195D649E003CCCF4 /* Matrix4.m */,
+				435244E4195AC66800D62D63 /* Model.swift */,
+				43AD54BE195DB1E300C43C20 /* Cube.swift */,
+				43AD54BC195DAFB600C43C20 /* Square.swift */,
+				435244E5195AC66800D62D63 /* Triangle.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4304BFCA195455A800326016 /* Textured Cube */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4304BFEB195455A800326016 /* Build configuration list for PBXNativeTarget "Textured Cube" */;
+			buildPhases = (
+				4304BFC7195455A800326016 /* Sources */,
+				4304BFC8195455A800326016 /* Frameworks */,
+				4304BFC9195455A800326016 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Textured Cube";
+			productName = "MetalTryOut-Objc";
+			productReference = 4304BFCB195455A800326016 /* Textured Cube.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4304BFE0195455A800326016 /* Textured CubeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4304BFEE195455A800326016 /* Build configuration list for PBXNativeTarget "Textured CubeTests" */;
+			buildPhases = (
+				4304BFDD195455A800326016 /* Sources */,
+				4304BFDE195455A800326016 /* Frameworks */,
+				4304BFDF195455A800326016 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4304BFE3195455A800326016 /* PBXTargetDependency */,
+			);
+			name = "Textured CubeTests";
+			productName = "MetalTryOut-ObjcTests";
+			productReference = 4304BFE1195455A800326016 /* Textured CubeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4304BFC3195455A800326016 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Andrew Kharchyshyn";
+				TargetAttributes = {
+					4304BFCA195455A800326016 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					4304BFE0195455A800326016 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 4304BFCA195455A800326016;
+					};
+				};
+			};
+			buildConfigurationList = 4304BFC6195455A800326016 /* Build configuration list for PBXProject "Textured Cube" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4304BFC2195455A800326016;
+			productRefGroup = 4304BFCC195455A800326016 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4304BFCA195455A800326016 /* Textured Cube */,
+				4304BFE0195455A800326016 /* Textured CubeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4304BFC9195455A800326016 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43479286195AC83E00FA2962 /* Images.xcassets in Resources */,
+				435244E1195AC56B00D62D63 /* Shaders.metal in Resources */,
+				435244D9195AC04000D62D63 /* Storyboard.storyboard in Resources */,
+				43479288195AC83E00FA2962 /* screenshot.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4304BFDF195455A800326016 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4304BFC7195455A800326016 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43AD54BD195DAFB600C43C20 /* Square.swift in Sources */,
+				435244E6195AC66800D62D63 /* Model.swift in Sources */,
+				434418FE195C474100D73ACE /* Matrix4x4.swift in Sources */,
+				435244D6195AC04000D62D63 /* AppDelegate.swift in Sources */,
+				435244E3195AC56B00D62D63 /* VertexBufferGenerator.m in Sources */,
+				435244D7195AC04000D62D63 /* MetalView.swift in Sources */,
+				435244D8195AC04000D62D63 /* MetalViewController.swift in Sources */,
+				43AD54BF195DB1E300C43C20 /* Cube.swift in Sources */,
+				435244E2195AC56B00D62D63 /* Vertex.swift in Sources */,
+				435244E0195AC56B00D62D63 /* BaseEffect.swift in Sources */,
+				43441901195C478400D73ACE /* UniformsBufferGenerator.m in Sources */,
+				437D5DA6195D649E003CCCF4 /* Matrix4.m in Sources */,
+				435244E7195AC66800D62D63 /* Triangle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4304BFDD195455A800326016 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4304BFE8195455A800326016 /* MetalTryOut_ObjcTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4304BFE3195455A800326016 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4304BFCA195455A800326016 /* Textured Cube */;
+			targetProxy = 4304BFE2195455A800326016 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		4304BFE9195455A800326016 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		4304BFEA195455A800326016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4304BFEC195455A800326016 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "MetalTryOut-Objc/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-Ofast";
+				PRODUCT_NAME = "Textured Cube";
+				SWIFT_OBJC_BRIDGING_HEADER = "MetalTryOut-Objc/Triangle-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Ofast";
+			};
+			name = Debug;
+		};
+		4304BFED195455A800326016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = "MetalTryOut-Objc/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-Ofast";
+				PRODUCT_NAME = "Textured Cube";
+				SWIFT_OBJC_BRIDGING_HEADER = "MetalTryOut-Objc/Triangle-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Ofast";
+			};
+			name = Release;
+		};
+		4304BFEF195455A800326016 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MetalTryOut-Objc.app/MetalTryOut-Objc";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MetalTryOut-ObjcTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "Textured CubeTests";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		4304BFF0195455A800326016 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MetalTryOut-Objc.app/MetalTryOut-Objc";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MetalTryOut-ObjcTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "Textured CubeTests";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4304BFC6195455A800326016 /* Build configuration list for PBXProject "Textured Cube" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4304BFE9195455A800326016 /* Debug */,
+				4304BFEA195455A800326016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4304BFEB195455A800326016 /* Build configuration list for PBXNativeTarget "Textured Cube" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4304BFEC195455A800326016 /* Debug */,
+				4304BFED195455A800326016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4304BFEE195455A800326016 /* Build configuration list for PBXNativeTarget "Textured CubeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4304BFEF195455A800326016 /* Debug */,
+				4304BFF0195455A800326016 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4304BFC3195455A800326016 /* Project object */;
+}
