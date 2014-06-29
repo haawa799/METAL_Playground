@@ -15,9 +15,9 @@ struct Uniforms{
 };
 
 struct Vertex{
-    float4 position;
-    float4 color;
-    float4 texCoord;
+    packed_float4 color;
+    packed_float3 position;
+    packed_float2 texCoord;
 };
 
 struct VertexOut
@@ -59,12 +59,12 @@ vertex VertexOut myVertexShader(const    global Vertex*    vertexArray   [[buffe
 {
     float4x4 mv_Matrix = mv_MatrixFromUniformBuffer(uniforms);
     float4x4 proj_Matrix = proj_MatrixFromUniformBuffer(uniforms);
-    float4 position = vertexArray[vid].position;
+    float4 position = {vertexArray[vid].position[0],vertexArray[vid].position[1],vertexArray[vid].position[2],1.0};
     
     VertexOut out;
     out.position = proj_Matrix * mv_Matrix * position;
     out.color = vertexArray[vid].color;
-    out.texCoord = {vertexArray[vid].texCoord[0],vertexArray[vid].texCoord[1]};
+    out.texCoord = vertexArray[vid].texCoord;
     return out;
 }
 

@@ -12,10 +12,10 @@ import UIKit
     
     init(baseEffect: BaseEffect)
     {
-        var A = Vertex(x: -1.0, y:  1.0, z: 0.0, w: 1.0, r: 1.0, g: 0.0, b: 0.0, a: 1.0, u: 0.0, v: 1.0)
-        var B = Vertex(x: -1.0, y: -1.0, z: 0.0, w: 1.0, r: 0.0, g: 1.0, b: 0.0, a: 1.0, u: 0.0, v: 0.0)
-        var C = Vertex(x:  1.0, y: -1.0, z: 0.0, w: 1.0, r: 0.0, g: 0.0, b: 1.0, a: 1.0, u: 1.0, v: 0.0)
-        var D = Vertex(x:  1.0, y:  1.0, z: 0.0, w: 1.0, r: 0.1, g: 0.6, b: 0.4, a: 1.0, u: 1.0, v: 1.0)
+        var A = Vertex(x: -1.0, y:  1.0, z: 0.0, r: 1.0, g: 0.0, b: 0.0, a: 1.0, u: 0.0, v: 1.0)
+        var B = Vertex(x: -1.0, y: -1.0, z: 0.0, r: 0.0, g: 1.0, b: 0.0, a: 1.0, u: 0.0, v: 0.0)
+        var C = Vertex(x:  1.0, y: -1.0, z: 0.0, r: 0.0, g: 0.0, b: 1.0, a: 1.0, u: 1.0, v: 0.0)
+        var D = Vertex(x:  1.0, y:  1.0, z: 0.0, r: 0.1, g: 0.6, b: 0.4, a: 1.0, u: 1.0, v: 1.0)
         
         var verticesArray:Array<Vertex> = [A,B,C ,A,C,D]
         

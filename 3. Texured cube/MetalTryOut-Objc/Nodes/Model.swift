@@ -70,12 +70,12 @@ import QuartzCore
         commandBuffer.addCompletedHandler(
         {
             (buffer:MTLCommandBuffer!) -> Void in
-//            println("qqq")
             var q = dispatch_semaphore_signal(self.avaliableUniformBuffers)
         })
         
         // MTLRenderPassDescriptor object represents a collection of configurable states
-        var renderPassDesc:MTLRenderPassDescriptor = MTLRenderPassDescriptor()
+        var renderPassDesc = MTLRenderPassDescriptor()
+        
         renderPassDesc.colorAttachments[0].texture = drawable.texture
         renderPassDesc.colorAttachments[0].loadAction = MTLLoadAction.Clear
         

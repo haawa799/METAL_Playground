@@ -10,14 +10,13 @@ import UIKit
 
 @objc class Vertex: NSObject
 {
-    var x,y,z,w,r,g,b,a,u,v: Float
+    var x,y,z,r,g,b,a,u,v: Float
     
-    init(x:Float, y:Float, z:Float, w:Float, r:Float, g:Float, b:Float, a:Float, u:Float ,v:Float)
+    init(x:Float, y:Float, z:Float, r:Float, g:Float, b:Float, a:Float, u:Float ,v:Float)
     {
         self.x = x
         self.y = y
         self.z = z
-        self.w = w
         self.r = r
         self.g = g
         self.b = b

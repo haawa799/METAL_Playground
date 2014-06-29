@@ -11,7 +11,7 @@
 
 static const int kNumberOfPositionComponents = 4;
 static const int kNumberOfColorComponents = 4;
-static const int kNumberOfTextureComponents = 4;
+static const int kNumberOfTextureComponents = 2;
 
 
 @implementation VertexBufferGenerator
@@ -26,20 +26,18 @@ static const int kNumberOfTextureComponents = 4;
     for (int vertexID = 0; vertexID < vertexCount.integerValue; vertexID++)
     {
         Vertex *vertex = vertices[vertexID];
-        vertexData[counter++] = vertex.x;
-        vertexData[counter++] = vertex.y;
-        vertexData[counter++] = vertex.z;
-        vertexData[counter++] = vertex.w;
         
         vertexData[counter++] = vertex.r;
         vertexData[counter++] = vertex.g;
         vertexData[counter++] = vertex.b;
         vertexData[counter++] = vertex.a;
         
+        vertexData[counter++] = vertex.x;
+        vertexData[counter++] = vertex.y;
+        vertexData[counter++] = vertex.z;
+        
         vertexData[counter++] = vertex.u;
         vertexData[counter++] = vertex.v;
-        vertexData[counter++] = 0;
-        vertexData[counter++] = 0;
     }
     
     id <MTLBuffer> vertexBuffer = [device newBufferWithBytes:vertexData length:sizeof(vertexData) options:0];
