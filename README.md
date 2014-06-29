@@ -11,4 +11,4 @@ NOTE:
 
 2) iOS 8 and device with A7 required! Doesn't work on simulator.
 
-![alt tag](http://cl.ly/image/0l0v3p412w0T/IMG_1160.PNG) ![alt tag](http://cl.ly/image/0N3Z1w0d3Z1N/IMG_1166.PNG) ![alt tag](http://cl.ly/image/2N3M0o2K1O0h/IMG_1167.PNG) 
+![alt tag](http://cl.ly/image/2h2p3x2r0f2E/triangle.png) ![alt tag](http://cl.ly/image/400Y0C3G2c0o/transform.png) ![alt tag](http://cl.ly/image/2u2v1W3H3T3b/texture.png) 
