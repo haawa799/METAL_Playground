@@ -17,12 +17,14 @@ struct Uniforms{
 struct Vertex{
     float4 position;
     float4 color;
+    float4 texCoord;
 };
 
 struct VertexOut
 {
     float4 position [[position]];
     float4 color;
+    float2 texCoord [[user(texturecoord)]];;
 };
 
 float4x4 mv_MatrixFromUniformBuffer(constant Uniforms&  uniformMatrix)
@@ -62,12 +64,15 @@ vertex VertexOut myVertexShader(const    global Vertex*    vertexArray   [[buffe
     VertexOut out;
     out.position = proj_Matrix * mv_Matrix * position;
     out.color = vertexArray[vid].color;
+    out.texCoord = {vertexArray[vid].texCoord[0],vertexArray[vid].texCoord[1]};
     return out;
 }
 
 
-fragment float4 myFragmentShader(VertexOut interpolated [[stage_in]])
+fragment float4 myFragmentShader(VertexOut interpolated [[stage_in]],
+                                 texture2d<float>  tex2D     [[ texture(0) ]],
+                                 sampler           sampler2D [[ sampler(0) ]])
 {
-    return interpolated.color;
+    return  /*interpolated.color */ tex2D.sample(sampler2D, interpolated.texCoord);
 }
 

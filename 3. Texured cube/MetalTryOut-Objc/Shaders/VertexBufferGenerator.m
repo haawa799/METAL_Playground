@@ -11,6 +11,7 @@
 
 static const int kNumberOfPositionComponents = 4;
 static const int kNumberOfColorComponents = 4;
+static const int kNumberOfTextureComponents = 4;
 
 
 @implementation VertexBufferGenerator
@@ -19,7 +20,7 @@ static const int kNumberOfColorComponents = 4;
                              vertexCount:(NSNumber *)vertexCount
                                   device:(id <MTLDevice>)device
 {
-    float vertexData[(kNumberOfPositionComponents + kNumberOfColorComponents)*vertexCount.intValue];
+    float vertexData[(kNumberOfPositionComponents + kNumberOfColorComponents + kNumberOfTextureComponents)*vertexCount.intValue];
     int counter = 0;
     
     for (int vertexID = 0; vertexID < vertexCount.integerValue; vertexID++)
@@ -34,6 +35,11 @@ static const int kNumberOfColorComponents = 4;
         vertexData[counter++] = vertex.g;
         vertexData[counter++] = vertex.b;
         vertexData[counter++] = vertex.a;
+        
+        vertexData[counter++] = vertex.u;
+        vertexData[counter++] = vertex.v;
+        vertexData[counter++] = 0;
+        vertexData[counter++] = 0;
     }
     
     id <MTLBuffer> vertexBuffer = [device newBufferWithBytes:vertexData length:sizeof(vertexData) options:0];

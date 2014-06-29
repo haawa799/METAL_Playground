@@ -17,6 +17,7 @@ import QuartzCore
     var baseEffect: BaseEffect
     let name: String
     var vertexCount: Int
+    var texture: MTLTexture?
     
     var positionX:Float = 0.0
     var positionY:Float = 0.0
@@ -30,22 +31,26 @@ import QuartzCore
     var vertexBuffer: MTLBuffer?
     var uniformBufferGenerator: AnyObject
     var uniformsBuffer: MTLBuffer?
+    var samplerState: MTLSamplerState?
     
     var avaliableUniformBuffers = dispatch_semaphore_create(3)
     
     init(name: String,
         baseEffect: BaseEffect,
         vertices: Array<Vertex>,
-        vertexCount: Int)
+        vertexCount: Int,
+        texture: MTLTexture)
     {
         self.name = name
         self.baseEffect = baseEffect
         self.vertexCount = vertexCount
+        self.texture = texture
         self.uniformBufferGenerator = UniformsBufferGenerator(numberOfInflightBuffers: 3, withDevice: baseEffect.device)
         
         super.init()
         
         self.vertexBuffer = generateVertexBuffer(vertices, vertexCount: vertexCount, device: baseEffect.device)
+        self.samplerState = generateSamplerStateForTexture(baseEffect.device)
     }
     
     func render(commandQueue: MTLCommandQueue, drawable: CAMetalDrawable, parentMVMatrix: AnyObject)
@@ -69,7 +74,6 @@ import QuartzCore
             var q = dispatch_semaphore_signal(self.avaliableUniformBuffers)
         })
         
-        
         // MTLRenderPassDescriptor object represents a collection of configurable states
         var renderPassDesc:MTLRenderPassDescriptor = MTLRenderPassDescriptor()
         renderPassDesc.colorAttachments[0].texture = drawable.texture
@@ -80,6 +84,8 @@ import QuartzCore
         commandEncoder.setRenderPipelineState(baseEffect.renderPipelineState)
         commandEncoder.setVertexBuffer(vertexBuffer, offset: 0, atIndex: 0)
         commandEncoder.setVertexBuffer(uniformsBuffer, offset: 0, atIndex: 1)
+        commandEncoder.setFragmentTexture(self.texture, atIndex: 0)
+        commandEncoder.setFragmentSamplerState(self.samplerState, atIndex: 0)
         commandEncoder.setCullMode(MTLCullMode.Front)
         commandEncoder.drawPrimitives(MTLPrimitiveType.Triangle, vertexStart: 0, vertexCount: vertexCount);
         commandEncoder.endEncoding();
@@ -109,8 +115,32 @@ import QuartzCore
         time += delta
     }
     
-    // Two following methods are used as a glue for Objective-C buffer generator code and Swift code
+    func generateSamplerStateForTexture(device: MTLDevice) -> MTLSamplerState?
+    {
+        var pSamplerDescriptor:MTLSamplerDescriptor? = MTLSamplerDescriptor();
+        
+        if let sampler = pSamplerDescriptor
+        {
+            sampler.minFilter             = MTLSamplerMinMagFilter.Nearest
+            sampler.magFilter             = MTLSamplerMinMagFilter.Nearest
+            sampler.mipFilter             = MTLSamplerMipFilter.NotMipmapped
+            sampler.maxAnisotropy         = 1
+            sampler.sAddressMode          = MTLSamplerAddressMode.ClampToEdge
+            sampler.tAddressMode          = MTLSamplerAddressMode.ClampToEdge
+            sampler.rAddressMode          = MTLSamplerAddressMode.ClampToEdge
+            sampler.normalizedCoordinates = true
+            sampler.lodMinClamp           = 0
+            sampler.lodMaxClamp           = FLT_MAX
+        }
+        else
+        {
+            println(">> ERROR: Failed creating a sampler descriptor!")
+        }
+        
+        return device.newSamplerStateWithDescriptor(pSamplerDescriptor)
+    }
     
+    // Two following methods are used as a glue for Objective-C buffer generator code and Swift code
     func getUniformsBuffer(mvMatrix: AnyObject, projMatrix: AnyObject, device: MTLDevice) -> MTLBuffer?
     {
         var mv:Matrix4 = mvMatrix as Matrix4

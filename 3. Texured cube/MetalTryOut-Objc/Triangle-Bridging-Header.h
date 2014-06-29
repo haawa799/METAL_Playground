@@ -4,6 +4,7 @@
 
 #import "VertexBufferGenerator.h"
 #import "UniformsBufferGenerator.h"
+#import "METLTexture.h"
 
 #import "Matrix4.h"
 
