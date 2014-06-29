@@ -27,9 +27,11 @@ import QuartzCore
     var rotationZ:Float = 0.0
     var scale:Float     = 1.0
     
-    
     var vertexBuffer: MTLBuffer?
+    var uniformBufferGenerator: AnyObject
     var uniformsBuffer: MTLBuffer?
+    
+    var avaliableUniformBuffers = dispatch_semaphore_create(3)
     
     init(name: String,
         baseEffect: BaseEffect,
@@ -39,6 +41,7 @@ import QuartzCore
         self.name = name
         self.baseEffect = baseEffect
         self.vertexCount = vertexCount
+        self.uniformBufferGenerator = UniformsBufferGenerator(numberOfInflightBuffers: 3, withDevice: baseEffect.device)
         
         super.init()
         
@@ -47,13 +50,24 @@ import QuartzCore
     
     func render(commandQueue: MTLCommandQueue, drawable: CAMetalDrawable, parentMVMatrix: AnyObject)
     {
+        
         var parentModelViewMatrix: Matrix4 = parentMVMatrix as Matrix4
         var myModelViewMatrix: Matrix4 = modelMatrix() as Matrix4
         myModelViewMatrix.multiplyLeft(parentModelViewMatrix)
         var projectionMatrix: Matrix4 = baseEffect.projectionMatrix as Matrix4
-        self.uniformsBuffer = generateUniformsBuffer(myModelViewMatrix, projMatrix: projectionMatrix, device: baseEffect.device)
+        self.uniformsBuffer = getUniformsBuffer(myModelViewMatrix, projMatrix: projectionMatrix, device: baseEffect.device)
+        
+        
+        //We are using 3 uniform buffers, we need to wait in case CPU wants to write in first uniform buffer, while GPU is still using it (case when GPU is 2 frames ahead CPU)
+        dispatch_semaphore_wait(avaliableUniformBuffers, DISPATCH_TIME_FOREVER)
         
         var commandBuffer = commandQueue.commandBuffer()
+        commandBuffer.addCompletedHandler(
+        {
+            (buffer:MTLCommandBuffer!) -> Void in
+//            println("qqq")
+            var q = dispatch_semaphore_signal(self.avaliableUniformBuffers)
+        })
         
         
         // MTLRenderPassDescriptor object represents a collection of configurable states
@@ -97,12 +111,12 @@ import QuartzCore
     
     // Two following methods are used as a glue for Objective-C buffer generator code and Swift code
     
-    func generateUniformsBuffer(mvMatrix: AnyObject, projMatrix: AnyObject, device: MTLDevice) -> MTLBuffer?
+    func getUniformsBuffer(mvMatrix: AnyObject, projMatrix: AnyObject, device: MTLDevice) -> MTLBuffer?
     {
         var mv:Matrix4 = mvMatrix as Matrix4
         var proj:Matrix4 = projMatrix as Matrix4
-        
-        uniformsBuffer = UniformsBufferGenerator.generateUniformBufferProjectionMatrix(proj, modelViewMatrix: mv, device: device)
+        var generator: UniformsBufferGenerator = self.uniformBufferGenerator as UniformsBufferGenerator
+        uniformsBuffer = generator.bufferWithProjectionMatrix(proj, modelViewMatrix: mv)
         return uniformsBuffer
     }
     

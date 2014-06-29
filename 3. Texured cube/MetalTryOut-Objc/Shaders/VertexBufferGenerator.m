@@ -7,7 +7,7 @@
 //
 
 #import "VertexBufferGenerator.h"
-#import "Cube_Transform-Swift.h"
+#import "Textured_Cube-Swift.h"
 
 static const int kNumberOfPositionComponents = 4;
 static const int kNumberOfColorComponents = 4;

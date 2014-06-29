@@ -12,10 +12,17 @@
 
 @class Matrix4x4;
 
+
+/// This class is responsible for providing a uniformBuffer which will be passed to vertex shader. It holds n buffers. In case n == 3 for frame0 it will give buffer0 for frame1 - buffer1 for frame2 - buffer2 for frame3 - buffer0 and so on. It's user responsibility to make sure that GPU is not using that buffer before use. For details refer to wwdc session 604 (18:00).
 @interface UniformsBufferGenerator : NSObject
 
-+ (id <MTLBuffer>)generateUniformBufferProjectionMatrix:(Matrix4 *)projMatrix
-                                        modelViewMatrix:(Matrix4 *)mvMatrix
-                                                 device:(id <MTLDevice>)device;
+@property(nonatomic,readonly) int indexOfAvaliableBuffer;
+@property(nonatomic,readonly) int numberOfInflightBuffers;
+
+- (instancetype)initWithNumberOfInflightBuffers:(int)inflightBuffersCount
+                                     withDevice:(id <MTLDevice>)device;
+
+- (id <MTLBuffer>)bufferWithProjectionMatrix:(Matrix4 *)projMatrix
+                             modelViewMatrix:(Matrix4 *)mvMatrix;
 
 @end
