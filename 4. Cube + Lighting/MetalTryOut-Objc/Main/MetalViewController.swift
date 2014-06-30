@@ -49,7 +49,9 @@ class MetalViewController: UIViewController,MetalViewProtocol {
     func setupMetal(){
         commandQ = device.newCommandQueue()
         baseEffect = BaseEffect(device: device, vertexShaderName: "myVertexShader", fragmentShaderName: "myFragmentShader")
-        baseEffect.ambientIntensity = 0.7
+        baseEffect.ambientIntensity = 0.1
+        baseEffect.diffuseIntensity = 0.8
+        baseEffect.lightDirection = [0.0,1.0,-1.0];
         
         var ratio: Float = Float(self.view.bounds.size.width) / Float(self.view.bounds.size.height)
         baseEffect.projectionMatrix = Matrix4.makePerspectiveViewAngle(Matrix4.degreesToRad(85.0), aspectRatio: ratio, nearZ: 1.0, farZ: 150.0)

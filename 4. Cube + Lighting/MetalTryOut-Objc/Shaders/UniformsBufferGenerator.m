@@ -10,8 +10,12 @@
 #import "Cube_Lighting-Swift.h"
 
 
-static const long kMaxBufferBytesPerFrame = 1024*1024;
-static const int  kFloatsPerMatrix4       = 16;
+static const long kMaxBufferBytesPerFrame   = 1024*1024;
+static const int  kFloatsPerMatrix4         = 16;
+
+static const int kLightColorComponents      = 4;
+static const int kLightDirectionComponents  = 3;
+static const int kLightIntensityComponents  = 2;
 
 @interface UniformsBufferGenerator()
 
@@ -48,32 +52,39 @@ static const int  kFloatsPerMatrix4       = 16;
 
 - (id <MTLBuffer>)bufferWithProjectionMatrix:(Matrix4 *)projMatrix
                              modelViewMatrix:(Matrix4 *)mvMatrix
-                              withLightColor:(MTLClearColor)lightColor
-                        withAmbientIntensity:(float)ambientIntensity
+                              withBaseEffect:(BaseEffect *)baseEffect
 {
     
-    float color[4] = {lightColor.red,lightColor.green,lightColor.blue,lightColor.alpha};
+    float color[4] = {baseEffect.lightColor.red,baseEffect.lightColor.green,baseEffect.lightColor.blue,baseEffect.lightColor.alpha};
     
-    float uniformFloatsBuffer[kFloatsPerMatrix4 * 2 + 4 + 1];
+    float uniformFloatsBuffer[kFloatsPerMatrix4 * 2 + kLightColorComponents + kLightDirectionComponents + kLightIntensityComponents];
+    
+    int counter = 0;
     for (int k = 0; k < 2; k++)
     {
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < kFloatsPerMatrix4; i++)
         {
             if(k == 0)
             {
-                uniformFloatsBuffer[16*k + i] = mvMatrix->glkMatrix.m[i];
+                uniformFloatsBuffer[counter++] = mvMatrix->glkMatrix.m[i];
             }
             else
             {
-                uniformFloatsBuffer[16*k + i] = projMatrix->glkMatrix.m[i];
+                uniformFloatsBuffer[counter++] = projMatrix->glkMatrix.m[i];
             }
         }
     }
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < kLightColorComponents; i++)
     {
-        uniformFloatsBuffer[16*2 + i] = color[i];
+        uniformFloatsBuffer[counter++] = color[i];
     }
-    uniformFloatsBuffer[16*2 + 4] = ambientIntensity;
+    for (int i = 0; i < kLightDirectionComponents; i++)
+    {
+        uniformFloatsBuffer[counter++] = [baseEffect.lightDirection[i] floatValue];
+    }
+    
+    uniformFloatsBuffer[counter++] = baseEffect.ambientIntensity;
+    uniformFloatsBuffer[counter++] = baseEffect.diffuseIntensity;
     
     id <MTLBuffer> uniformBuffer = self.buffers[self.indexOfAvaliableBuffer++];
     if(self.indexOfAvaliableBuffer == self.numberOfInflightBuffers)

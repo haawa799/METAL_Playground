@@ -146,7 +146,7 @@ import QuartzCore
         var mv:Matrix4 = mvMatrix as Matrix4
         var proj:Matrix4 = projMatrix as Matrix4
         var generator: UniformsBufferGenerator = self.uniformBufferGenerator as UniformsBufferGenerator
-        uniformsBuffer = generator.bufferWithProjectionMatrix(proj, modelViewMatrix: mv, withLightColor: baseEffect.lightColor, withAmbientIntensity: baseEffect.ambientIntensity)
+        uniformsBuffer = generator.bufferWithProjectionMatrix(proj, modelViewMatrix: mv, withBaseEffect: baseEffect)
         return uniformsBuffer
     }
     

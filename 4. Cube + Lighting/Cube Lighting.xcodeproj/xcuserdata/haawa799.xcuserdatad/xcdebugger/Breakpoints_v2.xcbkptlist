@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MetalTryOut-Objc/Shaders/VertexBufferGenerator.m"
-            timestampString = "425748348.569638"
+            timestampString = "425813685.476544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "+generateBufferVertices:vertexCount:device:"
             landmarkType = "5">
          </BreakpointContent>
@@ -116,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MetalTryOut-Objc/Shaders/VertexBufferGenerator.m"
-            timestampString = "425757555.533274"
+            timestampString = "425813685.476544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "+generateBufferVertices:vertexCount:device:"
             landmarkType = "5">
          </BreakpointContent>
@@ -132,13 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MetalTryOut-Objc/Shaders/VertexBufferGenerator.m"
-            timestampString = "425759032.3553"
+            timestampString = "425819225.428602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "+generateBufferVertices:vertexCount:device:"
-            landmarkType = "5">
+            startingLineNumber = "50"
+            endingLineNumber = "50">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
