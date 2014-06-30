@@ -48,10 +48,13 @@ static const int  kFloatsPerMatrix4       = 16;
 
 - (id <MTLBuffer>)bufferWithProjectionMatrix:(Matrix4 *)projMatrix
                              modelViewMatrix:(Matrix4 *)mvMatrix
+                              withLightColor:(MTLClearColor)lightColor
+                        withAmbientIntensity:(float)ambientIntensity
 {
     
+    float color[4] = {lightColor.red,lightColor.green,lightColor.blue,lightColor.alpha};
     
-    float uniformFloatsBuffer[kFloatsPerMatrix4 * 2];
+    float uniformFloatsBuffer[kFloatsPerMatrix4 * 2 + 4 + 1];
     for (int k = 0; k < 2; k++)
     {
         for (int i = 0; i < 16; i++)
@@ -66,6 +69,11 @@ static const int  kFloatsPerMatrix4       = 16;
             }
         }
     }
+    for (int i = 0; i < 4; i++)
+    {
+        uniformFloatsBuffer[16*2 + i] = color[i];
+    }
+    uniformFloatsBuffer[16*2 + 4] = ambientIntensity;
     
     id <MTLBuffer> uniformBuffer = self.buffers[self.indexOfAvaliableBuffer++];
     if(self.indexOfAvaliableBuffer == self.numberOfInflightBuffers)
@@ -74,7 +82,6 @@ static const int  kFloatsPerMatrix4       = 16;
     }
     uint8_t *bufferPointer = (uint8_t *)[uniformBuffer contents];
     
-    // 1st box
     memcpy(bufferPointer, &uniformFloatsBuffer, sizeof(uniformFloatsBuffer));
     bufferPointer += sizeof(uniformFloatsBuffer);
     

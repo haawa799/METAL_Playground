@@ -60,7 +60,7 @@ import QuartzCore
         var myModelViewMatrix: Matrix4 = modelMatrix() as Matrix4
         myModelViewMatrix.multiplyLeft(parentModelViewMatrix)
         var projectionMatrix: Matrix4 = baseEffect.projectionMatrix as Matrix4
-        self.uniformsBuffer = getUniformsBuffer(myModelViewMatrix, projMatrix: projectionMatrix, device: baseEffect.device)
+        self.uniformsBuffer = getUniformsBuffer(myModelViewMatrix, projMatrix: projectionMatrix, baseEffect: baseEffect)
         
         
         //We are using 3 uniform buffers, we need to wait in case CPU wants to write in first uniform buffer, while GPU is still using it (case when GPU is 2 frames ahead CPU)
@@ -141,12 +141,12 @@ import QuartzCore
     }
     
     // Two following methods are used as a glue for Objective-C buffer generator code and Swift code
-    func getUniformsBuffer(mvMatrix: AnyObject, projMatrix: AnyObject, device: MTLDevice) -> MTLBuffer?
+    func getUniformsBuffer(mvMatrix: AnyObject, projMatrix: AnyObject,baseEffect: BaseEffect) -> MTLBuffer?
     {
         var mv:Matrix4 = mvMatrix as Matrix4
         var proj:Matrix4 = projMatrix as Matrix4
         var generator: UniformsBufferGenerator = self.uniformBufferGenerator as UniformsBufferGenerator
-        uniformsBuffer = generator.bufferWithProjectionMatrix(proj, modelViewMatrix: mv)
+        uniformsBuffer = generator.bufferWithProjectionMatrix(proj, modelViewMatrix: mv, withLightColor: baseEffect.lightColor, withAmbientIntensity: baseEffect.ambientIntensity)
         return uniformsBuffer
     }
     

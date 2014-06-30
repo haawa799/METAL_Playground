@@ -16,6 +16,9 @@ import Metal
     var pipeLineDescriptor:MTLRenderPipelineDescriptor
     var projectionMatrix:AnyObject = Matrix4()
     
+    var lightColor = MTLClearColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    var ambientIntensity: Float = 1.0
+    
     init(device:MTLDevice ,vertexShaderName: String, fragmentShaderName:String)
     {
         self.device = device

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <Metal/Metal.h>
 #import "Matrix4.h"
 
@@ -23,6 +24,8 @@
                                      withDevice:(id <MTLDevice>)device;
 
 - (id <MTLBuffer>)bufferWithProjectionMatrix:(Matrix4 *)projMatrix
-                             modelViewMatrix:(Matrix4 *)mvMatrix;
+                             modelViewMatrix:(Matrix4 *)mvMatrix
+                              withLightColor:(MTLClearColor)lightColor
+                        withAmbientIntensity:(float)ambientIntensity;
 
 @end
