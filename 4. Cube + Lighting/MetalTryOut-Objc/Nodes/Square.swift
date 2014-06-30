@@ -12,12 +12,12 @@ import UIKit
     
     init(baseEffect: BaseEffect)
     {
-        var A = Vertex(x: -1.0, y:  1.0, z: 0.0, r: 1.0, g: 0.0, b: 0.0, a: 1.0, u: 0.0, v: 1.0)
-        var B = Vertex(x: -1.0, y: -1.0, z: 0.0, r: 0.0, g: 1.0, b: 0.0, a: 1.0, u: 0.0, v: 0.0)
-        var C = Vertex(x:  1.0, y: -1.0, z: 0.0, r: 0.0, g: 0.0, b: 1.0, a: 1.0, u: 1.0, v: 0.0)
-        var D = Vertex(x:  1.0, y:  1.0, z: 0.0, r: 0.1, g: 0.6, b: 0.4, a: 1.0, u: 1.0, v: 1.0)
+        var V0  = Vertex(x:  1.0, y: -1.0, z:  1.0, u: 1.0 , v: 0.0 , nX: 0.0 , nY: 0.0 , nZ: 0.0)
+        var V1  = Vertex(x:  1.0, y:  1.0, z:  1.0, u: 1.0 , v: 1.0 , nX: 0.0 , nY: 0.0 , nZ: 0.0)
+        var V2  = Vertex(x: -1.0, y:  1.0, z:  1.0, u: 0.0 , v: 1.0 , nX: 0.0 , nY: 0.0 , nZ: 0.0)
+        var V3  = Vertex(x: -1.0, y: -1.0, z:  1.0, u: 0.0 , v: 0.0 , nX: 0.0 , nY: 0.0 , nZ: 0.0)
         
-        var verticesArray:Array<Vertex> = [A,B,C ,A,C,D]
+        var verticesArray:Array<Vertex> = [V0, V1, V2, V2, V3, V0]
         
         var mTexture:METLTexture = METLTexture(resourceName: "bricks", ext: "jpeg")
         mTexture.finalize(baseEffect.device)

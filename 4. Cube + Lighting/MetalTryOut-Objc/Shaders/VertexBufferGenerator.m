@@ -10,7 +10,7 @@
 #import "Cube_Lighting-Swift.h"
 
 static const int kNumberOfPositionComponents = 4;
-static const int kNumberOfColorComponents = 4;
+static const int kNumberOfNormalComponents = 3;
 static const int kNumberOfTextureComponents = 2;
 
 
@@ -20,24 +20,25 @@ static const int kNumberOfTextureComponents = 2;
                              vertexCount:(NSNumber *)vertexCount
                                   device:(id <MTLDevice>)device
 {
-    float vertexData[(kNumberOfPositionComponents + kNumberOfColorComponents + kNumberOfTextureComponents)*vertexCount.intValue];
+    float vertexData[(kNumberOfPositionComponents + kNumberOfTextureComponents + kNumberOfNormalComponents)*vertexCount.intValue];
     int counter = 0;
     
     for (int vertexID = 0; vertexID < vertexCount.integerValue; vertexID++)
     {
         Vertex *vertex = vertices[vertexID];
         
-        vertexData[counter++] = vertex.r;
-        vertexData[counter++] = vertex.g;
-        vertexData[counter++] = vertex.b;
-        vertexData[counter++] = vertex.a;
-        
         vertexData[counter++] = vertex.x;
         vertexData[counter++] = vertex.y;
         vertexData[counter++] = vertex.z;
         
+        vertexData[counter++] = vertex.nX;
+        vertexData[counter++] = vertex.nY;
+        vertexData[counter++] = vertex.nZ;
+        
         vertexData[counter++] = vertex.u;
         vertexData[counter++] = vertex.v;
+        
+        
     }
     
     id <MTLBuffer> vertexBuffer = [device newBufferWithBytes:vertexData length:sizeof(vertexData) options:0];

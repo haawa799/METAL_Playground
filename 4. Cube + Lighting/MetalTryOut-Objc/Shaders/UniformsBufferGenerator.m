@@ -15,7 +15,7 @@ static const int  kFloatsPerMatrix4         = 16;
 
 static const int kLightColorComponents      = 4;
 static const int kLightDirectionComponents  = 3;
-static const int kLightIntensityComponents  = 2;
+static const int kLightIntensityComponents  = 4;
 
 @interface UniformsBufferGenerator()
 
@@ -82,9 +82,10 @@ static const int kLightIntensityComponents  = 2;
     {
         uniformFloatsBuffer[counter++] = [baseEffect.lightDirection[i] floatValue];
     }
-    
     uniformFloatsBuffer[counter++] = baseEffect.ambientIntensity;
     uniformFloatsBuffer[counter++] = baseEffect.diffuseIntensity;
+    uniformFloatsBuffer[counter++] = baseEffect.specularIntensity;
+    uniformFloatsBuffer[counter++] = baseEffect.shininess;
     
     id <MTLBuffer> uniformBuffer = self.buffers[self.indexOfAvaliableBuffer++];
     if(self.indexOfAvaliableBuffer == self.numberOfInflightBuffers)

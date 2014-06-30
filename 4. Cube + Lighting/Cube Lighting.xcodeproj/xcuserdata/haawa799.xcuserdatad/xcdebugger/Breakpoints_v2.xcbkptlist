@@ -132,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MetalTryOut-Objc/Shaders/VertexBufferGenerator.m"
-            timestampString = "425819225.428602"
+            timestampString = "425837782.990391"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50">
+            startingLineNumber = "51"
+            endingLineNumber = "51">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -14,6 +14,8 @@ struct Light{
     packed_float3 direction;
     float         ambientIntensity;
     float         diffuseIntensity;
+    float         specularIntensity;
+    float         shininess;
 };
 
 struct Uniforms{
@@ -23,22 +25,24 @@ struct Uniforms{
 };
 
 struct Vertex{
-    packed_float4 color;
     packed_float3 position;
+    packed_float3 normal;
     packed_float2 texCoord;
 };
 
 struct VertexOut
 {
     float4 position [[position]];
-    float4 color;
     float2 texCoord [[user(texturecoord)]];
     float3 normal;
+    float3 fragmentPosition;
     
     float3 lightDirection;
     float4 lightColor;
     float  diffuseIntensity;
     float  ambientIntensity;
+    float  specularIntensity;
+    float  shininess;
 };
 
 float4x4 mv_MatrixFromUniformBuffer(constant Uniforms&  uniformMatrix)
@@ -77,44 +81,25 @@ vertex VertexOut myVertexShader(const    global Vertex*    vertexArray   [[buffe
     float4 position = {vertexArray[vid].position[0],vertexArray[vid].position[1],vertexArray[vid].position[2],1.0};
     
     //Get normal
-    float4 normal;
-    if (vid < 6)
-    {
-        normal = {0.0,0.0,1.0,0.0};
-    }
-    else if (vid < 12)
-    {
-        normal = {0.0,0.0,-1.0,0.0};
-    }
-    else if (vid < 18)
-    {
-        normal = {-1.0,0.0,0.0,0.0};
-    }
-    else if (vid < 24)
-    {
-        normal = {1.0,0.0,0.0,0.0};
-    }
-    else if (vid < 30)
-    {
-        normal = {0.0,1.0,0.0,0.0};
-    }
-    else
-    {
-        normal = {0.0,-1.0,0.0,0.0};
-    }
+    float4 normal = {vertexArray[vid].normal[0],vertexArray[vid].normal[1],vertexArray[vid].normal[2],0.0};
     normal = mv_Matrix * normal;
+    
+    //Get fragment position
+    float4 fragmentPos4 = mv_Matrix * position;
     
     
     VertexOut out;
     out.position = proj_Matrix * mv_Matrix * position;
-    out.color = vertexArray[vid].color;
     out.texCoord = vertexArray[vid].texCoord;
     out.normal = {normal[0],normal[1],normal[2]};
+    out.fragmentPosition = {fragmentPos4[0],fragmentPos4[1],fragmentPos4[2]};
     
     out.lightDirection = uniforms.light.direction;
     out.lightColor = uniforms.light.color;
     out.diffuseIntensity = uniforms.light.diffuseIntensity;
     out.ambientIntensity = uniforms.light.ambientIntensity;
+    out.specularIntensity = uniforms.light.specularIntensity;
+    out.shininess = uniforms.light.shininess;
     
     return out;
 }
@@ -142,6 +127,12 @@ fragment float4 myFragmentShader(VertexOut interpolated [[stage_in]],
         diffuseColor[i] *= diffuseFactor * interpolated.diffuseIntensity;
     }
     
-    return (/*interpolated.color +*/ ambientColor + diffuseColor) * tex2D.sample(sampler2D, interpolated.texCoord);
+    //Get specular color
+    float3 eye = normalize(interpolated.fragmentPosition);
+    float3 reflection = reflect(lightDirection,normal);
+    float specularFactor = pow(max(0.0,-dot(reflection,eye)),interpolated.shininess);
+    float4 specularColor = interpolated.lightColor * specularFactor * interpolated.specularIntensity;
+    
+    return (/*interpolated.color +*/ ambientColor + diffuseColor + specularColor) * tex2D.sample(sampler2D, interpolated.texCoord);
 }
 

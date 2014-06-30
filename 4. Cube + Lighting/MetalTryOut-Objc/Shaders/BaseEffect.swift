@@ -20,6 +20,8 @@ import Metal
     var lightDirection: Float[] = [0.0,0.0,0.0]
     var diffuseIntensity: Float = 1.0
     var ambientIntensity: Float = 1.0
+    var specularIntensity: Float = 1.0
+    var shininess: Float = 1.0
     
     init(device:MTLDevice ,vertexShaderName: String, fragmentShaderName:String)
     {
