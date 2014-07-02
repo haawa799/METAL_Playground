@@ -23,9 +23,10 @@
 		435244E3195AC56B00D62D63 /* VertexBufferGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 435244DF195AC56B00D62D63 /* VertexBufferGenerator.m */; };
 		435244E6195AC66800D62D63 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244E4195AC66800D62D63 /* Model.swift */; };
 		435A6C0A19642F76005EACAC /* monkey.png in Resources */ = {isa = PBXBuildFile; fileRef = 435A6C0819642F76005EACAC /* monkey.png */; };
-		435A6C0D196430C7005EACAC /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435A6C0C196430C7005EACAC /* Monkey.swift */; };
 		437D5DA6195D649E003CCCF4 /* Matrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 437D5DA5195D649E003CCCF4 /* Matrix4.m */; };
 		438345AA1960739C00D98C92 /* METLTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 438345A91960739C00D98C92 /* METLTexture.m */; };
+		438A18A61964568000670614 /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438A18A41964568000670614 /* Monkey.swift */; };
+		438A18A71964568000670614 /* monkey.txt in Resources */ = {isa = PBXBuildFile; fileRef = 438A18A51964568000670614 /* monkey.txt */; };
 		43AD54BD195DAFB600C43C20 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD54BC195DAFB600C43C20 /* Square.swift */; };
 		43AD54BF195DB1E300C43C20 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD54BE195DB1E300C43C20 /* Cube.swift */; };
 /* End PBXBuildFile section */
@@ -64,11 +65,12 @@
 		435244DF195AC56B00D62D63 /* VertexBufferGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VertexBufferGenerator.m; sourceTree = "<group>"; };
 		435244E4195AC66800D62D63 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		435A6C0819642F76005EACAC /* monkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monkey.png; sourceTree = "<group>"; };
-		435A6C0C196430C7005EACAC /* Monkey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
 		437D5DA4195D649E003CCCF4 /* Matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4.h; sourceTree = "<group>"; };
 		437D5DA5195D649E003CCCF4 /* Matrix4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix4.m; sourceTree = "<group>"; };
 		438345A81960739C00D98C92 /* METLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = METLTexture.h; sourceTree = "<group>"; };
 		438345A91960739C00D98C92 /* METLTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = METLTexture.m; sourceTree = "<group>"; };
+		438A18A41964568000670614 /* Monkey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
+		438A18A51964568000670614 /* monkey.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monkey.txt; sourceTree = "<group>"; };
 		43AD54BC195DAFB600C43C20 /* Square.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		43AD54BE195DB1E300C43C20 /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,7 +181,8 @@
 		435244DA195AC06A00D62D63 /* Nodes */ = {
 			isa = PBXGroup;
 			children = (
-				435A6C0C196430C7005EACAC /* Monkey.swift */,
+				438A18A41964568000670614 /* Monkey.swift */,
+				438A18A51964568000670614 /* monkey.txt */,
 				435A6C0819642F76005EACAC /* monkey.png */,
 				434418FD195C474100D73ACE /* Matrix4x4.swift */,
 				437D5DA4195D649E003CCCF4 /* Matrix4.h */,
@@ -277,6 +280,7 @@
 				435244D9195AC04000D62D63 /* Storyboard.storyboard in Resources */,
 				43479288195AC83E00FA2962 /* screenshot.png in Resources */,
 				431E367C19605D6400E1A800 /* bricks.jpeg in Resources */,
+				438A18A71964568000670614 /* monkey.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +304,7 @@
 				434418FE195C474100D73ACE /* Matrix4x4.swift in Sources */,
 				435244D6195AC04000D62D63 /* AppDelegate.swift in Sources */,
 				435244E3195AC56B00D62D63 /* VertexBufferGenerator.m in Sources */,
-				435A6C0D196430C7005EACAC /* Monkey.swift in Sources */,
+				438A18A61964568000670614 /* Monkey.swift in Sources */,
 				435244D7195AC04000D62D63 /* MetalView.swift in Sources */,
 				435244D8195AC04000D62D63 /* MetalViewController.swift in Sources */,
 				43AD54BF195DB1E300C43C20 /* Cube.swift in Sources */,

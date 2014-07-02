@@ -28,20 +28,25 @@ import UIKit
         
         super.init()
     }
-    /*
-    init(x:Float, y:Float, z:Float, r:Float, g:Float, b:Float, a:Float, u:Float ,v:Float)
-    {
-    self.x = x
-    self.y = y
-    self.z = z
-    self.r = r
-    self.g = g
-    self.b = b
-    self.a = a
-    self.u = u
-    self.v = v
     
-    super.init()
+    init(text: String)
+    {
+        var list = text.componentsSeparatedByString(" ")
+        
+        var counter = 0
+        
+        self.x = list[counter++].bridgeToObjectiveC().floatValue
+        self.y = list[counter++].bridgeToObjectiveC().floatValue
+        self.z = list[counter++].bridgeToObjectiveC().floatValue
+        
+        self.u = list[counter++].bridgeToObjectiveC().floatValue
+        self.v = list[counter++].bridgeToObjectiveC().floatValue
+        
+        self.nX = list[counter++].bridgeToObjectiveC().floatValue
+        self.nY = list[counter++].bridgeToObjectiveC().floatValue
+        self.nZ = list[counter++].bridgeToObjectiveC().floatValue
+        
+        super.init()
     }
-    */
+    
 }
