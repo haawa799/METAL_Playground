@@ -7,12 +7,12 @@
         <!--Metal View Controller-->
         <scene sceneID="3qw-8C-YgM">
             <objects>
-                <viewController id="yRV-ez-iVL" customClass="MetalViewController" customModule="Triangle" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yRV-ez-iVL" customClass="MetalViewController" customModule="Imported_Model" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="22q-vg-WOA"/>
                         <viewControllerLayoutGuide type="bottom" id="SED-31-Uaa"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="yeb-wx-12M" customClass="MetalView" customModule="Triangle" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="yeb-wx-12M" customClass="MetalView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

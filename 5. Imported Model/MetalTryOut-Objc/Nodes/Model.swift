@@ -18,6 +18,7 @@ import QuartzCore
     let name: String
     var vertexCount: Int
     var texture: MTLTexture?
+    var depthState: MTLDepthStencilState?
     
     var positionX:Float = 0.0
     var positionY:Float = 0.0
@@ -59,9 +60,14 @@ import QuartzCore
         
         self.vertexBuffer = generateVertexBuffer(vertices, vertexCount: vertexCount, device: baseEffect.device)
         self.samplerState = generateSamplerStateForTexture(baseEffect.device)
+        
+        var depthStateDesc = MTLDepthStencilDescriptor()
+        depthStateDesc.depthCompareFunction = MTLCompareFunction.Less
+        depthStateDesc.depthWriteEnabled = true
+        depthState = baseEffect.device.newDepthStencilStateWithDescriptor(depthStateDesc)
     }
     
-    func render(commandQueue: MTLCommandQueue, drawable: CAMetalDrawable, parentMVMatrix: AnyObject)
+    func render(commandQueue: MTLCommandQueue, metalView: MetalView, parentMVMatrix: AnyObject)
     {
         
         var parentModelViewMatrix: Matrix4 = parentMVMatrix as Matrix4
@@ -81,25 +87,24 @@ import QuartzCore
             var q = dispatch_semaphore_signal(self.avaliableUniformBuffers)
         })
         
-        // MTLRenderPassDescriptor object represents a collection of configurable states
-        var renderPassDesc = MTLRenderPassDescriptor()
-        
-        renderPassDesc.colorAttachments[0].texture = drawable.texture
-        renderPassDesc.colorAttachments[0].loadAction = MTLLoadAction.Clear
         
         // Create MTLRenderCommandEncoder object which translates all states into a command for GPU
-        var commandEncoder:MTLRenderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPassDesc)
+        var renderPathDescriptor = metalView.renderPassDescriptor
+        
+        var commandEncoder:MTLRenderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPathDescriptor)
+        commandEncoder.setDepthStencilState(depthState)
+        
         commandEncoder.setRenderPipelineState(baseEffect.renderPipelineState)
         commandEncoder.setVertexBuffer(vertexBuffer, offset: 0, atIndex: 0)
         commandEncoder.setVertexBuffer(uniformsBuffer, offset: 0, atIndex: 1)
         commandEncoder.setFragmentTexture(self.texture, atIndex: 0)
         commandEncoder.setFragmentSamplerState(self.samplerState, atIndex: 0)
         commandEncoder.setCullMode(MTLCullMode.Front)
-        commandEncoder.drawPrimitives(MTLPrimitiveType.Triangle, vertexStart: 0, vertexCount: vertexCount);
-        commandEncoder.endEncoding();
+        commandEncoder.drawPrimitives(MTLPrimitiveType.Triangle, vertexStart: 0, vertexCount: vertexCount)
+        commandEncoder.endEncoding()
         
         // After command in command buffer is encoded for GPU we provide drawable that will be invoked when this command buffer has been scheduled for execution
-        if let drawableAnyObject = drawable as? MTLDrawable
+        if let drawableAnyObject = metalView.currentDrawable as? MTLDrawable
         {
             commandBuffer.presentDrawable(drawableAnyObject);
         }

@@ -24,11 +24,14 @@ import Metal
         self.device = device
         
         // Setup MTLRenderPipline descriptor object with vertex and fragment shader
-        pipeLineDescriptor = MTLRenderPipelineDescriptor();
-        var library = device.newDefaultLibrary();
-        pipeLineDescriptor.vertexFunction = library.newFunctionWithName(vertexShaderName);
-        pipeLineDescriptor.fragmentFunction = library.newFunctionWithName(fragmentShaderName);
-        pipeLineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormat.FormatBGRA8Unorm;
+        pipeLineDescriptor = MTLRenderPipelineDescriptor()
+        var library = device.newDefaultLibrary()
+        pipeLineDescriptor.vertexFunction = library.newFunctionWithName(vertexShaderName)
+        pipeLineDescriptor.fragmentFunction = library.newFunctionWithName(fragmentShaderName)
+        pipeLineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormat.FormatBGRA8Unorm
+        pipeLineDescriptor.depthWriteEnabled = true
+        pipeLineDescriptor.sampleCount = 4
+        pipeLineDescriptor.depthAttachmentPixelFormat = MTLPixelFormat.FormatDepth32Float
         
         super.init()
     }
@@ -36,7 +39,7 @@ import Metal
     func compile() -> MTLRenderPipelineState?
     {
         // Compile the MTLRenderPipline object into immutable and cheap for use MTLRenderPipelineState
-        renderPipelineState = device.newRenderPipelineStateWithDescriptor(pipeLineDescriptor, error: nil);
+        renderPipelineState = device.newRenderPipelineStateWithDescriptor(pipeLineDescriptor, error: nil)
         return renderPipelineState
     }
 }

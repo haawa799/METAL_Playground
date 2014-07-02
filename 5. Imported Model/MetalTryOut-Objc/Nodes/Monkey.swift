@@ -33,7 +33,7 @@ import UIKit
         super.updateWithDelta(delta)
         
         //        rotationZ += Float(M_PI/10) * Float(delta)
-        rotationX += Float(M_PI/8) * Float(delta)
+        rotationX += Float(M_PI/2) * Float(delta)
     }
 
 }
