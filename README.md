@@ -24,16 +24,23 @@ Here are steps on how I used it to get that Ram rendered.
 
 1. Put your OBJ and MTL file (generated from Blender) into one folder
 ![alt tag](http://cl.ly/image/012R0p303g2J/Screen%20Shot%202014-07-04%20at%2012.14.22%20AM.png) 
+
 2. Make sure that both OBJ and MTL files have same name, and this name will be your Swift class name, in my case it's "ram.obj" and "ram.mtl"
+
 3. Put Obj_Convert.py file into same folder
 ![alt tag](http://cl.ly/image/0s2A0G1P2G2X/Screen%20Shot%202014-07-04%20at%2012.14.57%20AM.png)
+
 4. From terminal cd to your folder
 ![alt tag](http://cl.ly/image/00312g2F2Q2y/Screen%20Shot%202014-07-04%20at%2012.16.01%20AM.png)
+
 5. Run following command "python Obj_Convert.py name" name should be equal to .obj and .mtl file names in my case it's "ram"
 ![alt tag](http://cl.ly/image/010Y1q410g2E/Screen%20Shot%202014-07-04%20at%2012.16.41%20AM.png)
+
 6. Check you folder, .swift and .txt files should be there, drag and drop them into your project
 ![alt tag](http://cl.ly/image/410j0F330G22/Screen%20Shot%202014-07-04%20at%2012.19.00%20AM.png)
 ![alt tag](http://cl.ly/image/2Z3a1B3w3v3c/Screen%20Shot%202014-07-04%20at%2012.20.55%20AM.png)
+
 7. Double check .swift file, wethere texture name is correct
 ![alt tag](http://cl.ly/image/3N2u1l3k1f0w/Screen%20Shot%202014-07-04%20at%2012.57.21%20AM.png)
+
 8. Use imported model as any other Model subclass inside your MetalViewController
