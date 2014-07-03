@@ -30,7 +30,7 @@ import Metal
         pipeLineDescriptor.fragmentFunction = library.newFunctionWithName(fragmentShaderName)
         pipeLineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormat.FormatBGRA8Unorm
         pipeLineDescriptor.depthWriteEnabled = true
-        pipeLineDescriptor.sampleCount = 4
+        pipeLineDescriptor.sampleCount = 1
         pipeLineDescriptor.depthAttachmentPixelFormat = MTLPixelFormat.FormatDepth32Float
         
         super.init()

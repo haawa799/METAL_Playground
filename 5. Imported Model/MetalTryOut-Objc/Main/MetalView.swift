@@ -21,7 +21,7 @@ import Metal
     //Public API
     
     var metalViewDelegate: MetalViewProtocol?
-    var frameBuffer: FrameBuffer!
+    var frameBuffer: AnyObject!
     
     func setFPSLabelHidden(hidden: Bool){
         if let label = fpsLabel{
@@ -41,12 +41,19 @@ import Metal
     
     func display()
     {
-        frameBuffer.drawableSize = self.bounds.size
+        var frameBuf = frameBuffer as FrameBuffer
         
-        frameBuffer.drawableSize.width  *= self.contentScaleFactor;
-        frameBuffer.drawableSize.height *= self.contentScaleFactor;
+        frameBuf.drawableSize = self.bounds.size
         
-        frameBuffer.display()
+        frameBuf.drawableSize.width  *= self.contentScaleFactor;
+        frameBuf.drawableSize.height *= self.contentScaleFactor;
+        
+        var size = self.bounds.size
+        
+        size.width  *= self.contentScaleFactor
+        size.height *= self.contentScaleFactor
+        
+        frameBuf.displayWithDrawableSize(size)
     }
     
     
@@ -67,18 +74,18 @@ import Metal
         
         self.addConstraints([rightConstraint,botConstraint,widthConstraint,heightConstraint])
         
-        frameBuffer.layerSizeDidUpdate = true
+        (frameBuffer as FrameBuffer).layerSizeDidUpdate = true
         
         super.layoutSubviews()
     }
     
     func setup(){
-        
+    
         fpsLabel = UILabel(frame: CGRectZero)
         fpsLabel!.setTranslatesAutoresizingMaskIntoConstraints(false)
         fpsLabel!.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.6)
         self.addSubview(fpsLabel)
-    
+
         
         self.opaque          = true
         self.backgroundColor = nil

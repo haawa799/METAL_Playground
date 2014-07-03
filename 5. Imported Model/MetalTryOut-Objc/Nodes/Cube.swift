@@ -66,7 +66,7 @@ import UIKit
         ]
 
         
-        super.init(name: "Cube", baseEffect: baseEffect, vertices: verticesArray, vertexCount: verticesArray.count, textureName: "bricks.jpeg")
+        super.init(name: "Cube", baseEffect: baseEffect, vertices: verticesArray, vertexCount: verticesArray.count, textureName: "smiley.png")
     }
     
     override func updateWithDelta(delta: CFTimeInterval)

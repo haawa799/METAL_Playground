@@ -14,41 +14,24 @@
 
 @interface FrameBuffer : NSObject
 
-+ (MTLRenderPassAttachmentDescriptor *)colorAttachment:(id <MTLTexture>)texture
-                                           sampleCount:(int)sampleCount
-                                               msaaTex:(id <MTLTexture>)msaaTex
-                                                device:(id <MTLDevice>)device;
-
-
-+ (MTLRenderPassAttachmentDescriptor *)depthAttachment:(id <MTLTexture>)texture
-                                           sampleCount:(int)sampleCount
-                                              depthTex:(id <MTLTexture>)depthTex
-                                                device:(id <MTLDevice>)device
-                                      depthPixelFormat:(MTLPixelFormat)depthPixelFormat;
-
-
-+ (MTLRenderPassAttachmentDescriptor *)stencilAttachment:(id <MTLTexture>)texture
-                                             sampleCount:(int)sampleCount
-                                              stencilTex:(id <MTLTexture>)stencilTex
-                                                  device:(id <MTLDevice>)device
-                                      stencilPixelFormat:(MTLPixelFormat)stencilPixelFormat;
-
 
 @property (nonatomic, readonly) id <MTLDevice> device;
 @property (nonatomic, readonly) id <CAMetalDrawable> currentDrawable;
-@property (nonatomic) CGSize drawableSize;
 @property (nonatomic, readonly) MTLRenderPassDescriptor *renderPassDescriptor;
 
 @property (nonatomic) MTLPixelFormat depthPixelFormat;
 @property (nonatomic) MTLPixelFormat stencilPixelFormat;
 @property (nonatomic) NSUInteger     sampleCount;
 
+// Change this value when layerSize changes (orientation change or when contens scale set)
 @property (nonatomic) BOOL layerSizeDidUpdate;
 
+// New drawable size must be reset before call display
+@property (nonatomic) CGSize drawableSize;
+
+
 - (instancetype)initWithMetalView:(MetalView *)metalView;
-
 - (void)releaseTextures;
-
-- (void)display;
+- (void)displayWithDrawableSize:(CGSize)drawableSize;
 
 @end

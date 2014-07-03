@@ -103,8 +103,8 @@
     // Vertical Reflect
     if(flip)
     {
-        CGContextTranslateCTM(pContext, width, height);
-        CGContextScaleCTM(pContext, -1.0, -1.0);
+        CGContextTranslateCTM(pContext, 0, height);
+        CGContextScaleCTM(pContext, 1.0, -1.0);
     } // if
     
     CGContextDrawImage(pContext, bounds, pImage.CGImage );
@@ -114,7 +114,7 @@
     MTLTextureDescriptor *pTexDesc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm
                                                                                         width:width
                                                                                        height:height
-                                                                                    mipmapped:NO];
+                                                                                    mipmapped:YES];
     self.target  = pTexDesc.textureType;
     self.texture = [device newTextureWithDescriptor:pTexDesc];
     

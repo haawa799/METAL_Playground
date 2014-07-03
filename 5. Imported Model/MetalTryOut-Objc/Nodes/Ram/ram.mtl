@@ -1,0 +1,47 @@
+# Blender MTL File: 'ram_glsl.blend'
+# Material Count: 4
+
+newmtl ram_skin
+Ns -0.000015
+Ka 0.000000 0.000000 0.000000
+Kd 0.074341 0.056455 0.056455
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Bump textures/char_ram_nor.png
+map_Kd textures/char_ram_col.png
+
+newmtl ram_skin_eyelids
+Ns 260.784314
+Ka 0.000000 0.000000 0.000000
+Kd 0.129611 0.129611 0.129611
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump textures/char_ram_nor.png
+map_Kd textures/char_ram_col.png
+
+newmtl ram_skin_eyes
+Ns 372.549020
+Ka 0.000000 0.000000 0.000000
+Kd 0.200000 0.200000 0.200000
+Ks 0.500000 0.500000 0.500000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump textures/char_ram_nor.png
+map_Kd textures/char_ram_col.png
+
+newmtl ram_skin_horns
+Ns 45.098039
+Ka 0.000000 0.000000 0.000000
+Kd 0.259223 0.259223 0.259223
+Ks 0.200000 0.200000 0.200000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Bump textures/char_ram_nor.png
+map_Kd textures/char_ram_col.png
+map_Ns textures/char_ram_nor.png
