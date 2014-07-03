@@ -89,7 +89,7 @@ import QuartzCore
         
         
         // Create MTLRenderCommandEncoder object which translates all states into a command for GPU
-        var renderPathDescriptor = metalView.renderPassDescriptor
+        var renderPathDescriptor = metalView.frameBuffer.renderPassDescriptor
         
         var commandEncoder:MTLRenderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPathDescriptor)
         commandEncoder.setDepthStencilState(depthState)
@@ -104,7 +104,7 @@ import QuartzCore
         commandEncoder.endEncoding()
         
         // After command in command buffer is encoded for GPU we provide drawable that will be invoked when this command buffer has been scheduled for execution
-        if let drawableAnyObject = metalView.currentDrawable as? MTLDrawable
+        if let drawableAnyObject = metalView.frameBuffer.currentDrawable as? MTLDrawable
         {
             commandBuffer.presentDrawable(drawableAnyObject);
         }

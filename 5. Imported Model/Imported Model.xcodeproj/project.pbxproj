@@ -24,11 +24,12 @@
 		435A6C0A19642F76005EACAC /* monkey.png in Resources */ = {isa = PBXBuildFile; fileRef = 435A6C0819642F76005EACAC /* monkey.png */; };
 		437D5DA6195D649E003CCCF4 /* Matrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 437D5DA5195D649E003CCCF4 /* Matrix4.m */; };
 		438345AA1960739C00D98C92 /* METLTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 438345A91960739C00D98C92 /* METLTexture.m */; };
+		438800191965558F00043B15 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438800181965558F00043B15 /* MetalView.swift */; };
+		4388001C19655C6400043B15 /* FrameBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4388001B19655C6400043B15 /* FrameBuffer.m */; };
 		438A18A61964568000670614 /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438A18A41964568000670614 /* Monkey.swift */; };
 		438A18A71964568000670614 /* monkey.txt in Resources */ = {isa = PBXBuildFile; fileRef = 438A18A51964568000670614 /* monkey.txt */; };
 		43AD54BD195DAFB600C43C20 /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD54BC195DAFB600C43C20 /* Square.swift */; };
 		43AD54BF195DB1E300C43C20 /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AD54BE195DB1E300C43C20 /* Cube.swift */; };
-		43CD062D1964B2A000A5E475 /* MetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CD062C1964B2A000A5E475 /* MetalView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,12 +69,13 @@
 		437D5DA5195D649E003CCCF4 /* Matrix4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix4.m; sourceTree = "<group>"; };
 		438345A81960739C00D98C92 /* METLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = METLTexture.h; sourceTree = "<group>"; };
 		438345A91960739C00D98C92 /* METLTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = METLTexture.m; sourceTree = "<group>"; };
+		438800181965558F00043B15 /* MetalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetalView.swift; sourceTree = "<group>"; };
+		4388001A19655C6400043B15 /* FrameBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameBuffer.h; sourceTree = "<group>"; };
+		4388001B19655C6400043B15 /* FrameBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameBuffer.m; sourceTree = "<group>"; };
 		438A18A41964568000670614 /* Monkey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
 		438A18A51964568000670614 /* monkey.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monkey.txt; sourceTree = "<group>"; };
 		43AD54BC195DAFB600C43C20 /* Square.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Square.swift; sourceTree = "<group>"; };
 		43AD54BE195DB1E300C43C20 /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
-		43CD062B1964B29F00A5E475 /* MetalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetalView.h; sourceTree = "<group>"; };
-		43CD062C1964B2A000A5E475 /* MetalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetalView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,8 +157,9 @@
 		435244D0195ABFFF00D62D63 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				43CD062B1964B29F00A5E475 /* MetalView.h */,
-				43CD062C1964B2A000A5E475 /* MetalView.m */,
+				438800181965558F00043B15 /* MetalView.swift */,
+				4388001A19655C6400043B15 /* FrameBuffer.h */,
+				4388001B19655C6400043B15 /* FrameBuffer.m */,
 				435244D2195AC04000D62D63 /* AppDelegate.swift */,
 				435244D4195AC04000D62D63 /* MetalViewController.swift */,
 				435244D5195AC04000D62D63 /* Storyboard.storyboard */,
@@ -301,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43AD54BD195DAFB600C43C20 /* Square.swift in Sources */,
+				4388001C19655C6400043B15 /* FrameBuffer.m in Sources */,
 				438345AA1960739C00D98C92 /* METLTexture.m in Sources */,
 				435244E6195AC66800D62D63 /* Model.swift in Sources */,
 				434418FE195C474100D73ACE /* Matrix4x4.swift in Sources */,
@@ -308,10 +312,10 @@
 				435244E3195AC56B00D62D63 /* VertexBufferGenerator.m in Sources */,
 				438A18A61964568000670614 /* Monkey.swift in Sources */,
 				435244D8195AC04000D62D63 /* MetalViewController.swift in Sources */,
-				43CD062D1964B2A000A5E475 /* MetalView.m in Sources */,
 				43AD54BF195DB1E300C43C20 /* Cube.swift in Sources */,
 				435244E2195AC56B00D62D63 /* Vertex.swift in Sources */,
 				435244E0195AC56B00D62D63 /* BaseEffect.swift in Sources */,
+				438800191965558F00043B15 /* MetalView.swift in Sources */,
 				43441901195C478400D73ACE /* UniformsBufferGenerator.m in Sources */,
 				437D5DA6195D649E003CCCF4 /* Matrix4.m in Sources */,
 			);

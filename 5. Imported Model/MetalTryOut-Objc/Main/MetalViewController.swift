@@ -64,10 +64,6 @@ class MetalViewController: UIViewController {
         metalView.addSubview(fpsLabel)
         fpsLabel.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.8)
         
-        metalView.depthPixelFormat   = MTLPixelFormat.FormatDepth32Float
-        metalView.stencilPixelFormat = MTLPixelFormat.FormatInvalid
-        metalView.sampleCount        = 4
-        
         commandQ = device.newCommandQueue()
         baseEffect = BaseEffect(device: device, vertexShaderName: "myVertexShader", fragmentShaderName: "myFragmentShader")
         baseEffect.lightDirection = [0.0,1.0,-1.0]

@@ -1,0 +1,366 @@
+//
+//  FrameBufferHelper.m
+//  Imported Model
+//
+//  Created by Andrew K. on 7/3/14.
+//  Copyright (c) 2014 Andrew Kharchyshyn. All rights reserved.
+//
+
+#import "FrameBuffer.h"
+#import "Imported_Model-Swift.h"
+
+@implementation FrameBuffer
+{
+@private
+    __weak CAMetalLayer *_metalLayer;
+    
+    id <MTLTexture>  _depthTex;
+    id <MTLTexture>  _stencilTex;
+    id <MTLTexture>  _msaaTex;
+}
+
+@synthesize currentDrawable      = _currentDrawable;
+@synthesize renderPassDescriptor = _renderPassDescriptor;
+
+
+
++ (MTLRenderPassAttachmentDescriptor *)colorAttachment:(id <MTLTexture>)texture
+                                             sampleCount:(int)sampleCount
+                                                 msaaTex:(id <MTLTexture>)msaaTex
+                                                  device:(id <MTLDevice>)device
+{
+    // create a color attachment every frame since we have to recreate the texture every frame
+    MTLRenderPassAttachmentDescriptor *colorAttachment = [MTLRenderPassAttachmentDescriptor new];
+    colorAttachment.texture = texture;
+    
+    // make sure to clear every frame for best performance
+    [colorAttachment setLoadAction:MTLLoadActionClear];
+    [colorAttachment setClearValue:MTLClearValueMakeColor(0.65f, 0.65f, 0.65f, 1.0f)];
+    
+    // if sample count is greater than 1, render into using MSAA, then resolve into our color texture
+    if(sampleCount > 1)
+    {
+        BOOL doUpdate =     ( msaaTex.width       != texture.width  )
+        ||  ( msaaTex.height      != texture.height )
+        ||  ( msaaTex.sampleCount != sampleCount   );
+        
+        if(!msaaTex || (msaaTex && doUpdate))
+        {
+            MTLTextureDescriptor* desc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat: MTLPixelFormatBGRA8Unorm
+                                                                                            width: texture.width
+                                                                                           height: texture.height
+                                                                                        mipmapped: NO];
+            desc.textureType = MTLTextureType2DMultisample;
+            
+            // sample count was specified to the view by the renderer.
+            // this must match the sample count given to any pipeline state using this render pass descriptor
+            desc.sampleCount = sampleCount;
+            
+            msaaTex = [device newTextureWithDescriptor: desc];
+        }
+        
+        // When multisampling, perform rendering to _msaaTex, then resolve
+        // to 'texture' at the end of the scene
+        [colorAttachment setTexture: msaaTex];
+        [colorAttachment setResolveTexture: texture];
+        
+        // set store action to resolve in this case
+        [colorAttachment setStoreAction: MTLStoreActionMultisampleResolve];
+    }
+    else
+    {
+        // store only attachments that will be presented to the screen, as in this case
+        [colorAttachment setStoreAction: MTLStoreActionStore];
+    } // color0
+    
+    return colorAttachment;
+}
+
+
++ (MTLRenderPassAttachmentDescriptor *)depthAttachment:(id <MTLTexture>)texture
+                                           sampleCount:(int)sampleCount
+                                              depthTex:(id <MTLTexture>)depthTex
+                                                device:(id <MTLDevice>)device
+                                      depthPixelFormat:(MTLPixelFormat)depthPixelFormat
+{
+    MTLRenderPassAttachmentDescriptor *depthAttachment = nil;
+    
+    if(depthPixelFormat != MTLPixelFormatInvalid)
+    {
+        BOOL doUpdate =     ( depthTex.width       != texture.width  )
+        ||  ( depthTex.height      != texture.height )
+        ||  ( depthTex.sampleCount != sampleCount   );
+        
+        if(!depthTex || doUpdate)
+        {
+            //  If we need a depth texture and don't have one, or if the depth texture we have is the wrong size
+            //  Then allocate one of the proper size
+            MTLTextureDescriptor* desc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat: depthPixelFormat
+                                                                                            width: texture.width
+                                                                                           height: texture.height
+                                                                                        mipmapped: NO];
+            
+            desc.textureType = (sampleCount > 1) ? MTLTextureType2DMultisample : MTLTextureType2D;
+            desc.sampleCount = sampleCount;
+            
+            depthTex = [device newTextureWithDescriptor: desc];
+            
+            depthAttachment = [MTLRenderPassAttachmentDescriptor new];
+            depthAttachment.texture = depthTex;
+            [depthAttachment setLoadAction:MTLLoadActionClear];
+            [depthAttachment setClearValue:MTLClearValueMakeDepth(1.0)];
+            [depthAttachment setStoreAction: MTLStoreActionDontCare];
+            
+        }
+    } // depth
+    
+    return depthAttachment;
+}
+
+
++ (MTLRenderPassAttachmentDescriptor *)stencilAttachment:(id <MTLTexture>)texture
+                                             sampleCount:(int)sampleCount
+                                              stencilTex:(id <MTLTexture>)stencilTex
+                                                  device:(id <MTLDevice>)device
+                                      stencilPixelFormat:(MTLPixelFormat)stencilPixelFormat
+{
+    MTLRenderPassAttachmentDescriptor* stencilAttachment = nil;
+    
+    if(stencilPixelFormat != MTLPixelFormatInvalid)
+    {
+        BOOL doUpdate  =    ( stencilTex.width       != texture.width  )
+        ||  ( stencilTex.height      != texture.height )
+        ||  ( stencilTex.sampleCount != sampleCount   );
+        
+        if(!stencilTex || doUpdate)
+        {
+            //  If we need a stencil texture and don't have one, or if the depth texture we have is the wrong size
+            //  Then allocate one of the proper size
+            
+            MTLTextureDescriptor* desc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat: stencilPixelFormat
+                                                                                            width: texture.width
+                                                                                           height: texture.height
+                                                                                        mipmapped: NO];
+            
+            desc.textureType = (sampleCount > 1) ? MTLTextureType2DMultisample : MTLTextureType2D;
+            desc.sampleCount = sampleCount;
+            
+            stencilTex = [device newTextureWithDescriptor: desc];
+            
+            stencilAttachment = [MTLRenderPassAttachmentDescriptor new];
+            stencilAttachment.texture = stencilTex;
+            [stencilAttachment setLoadAction:MTLLoadActionClear];
+            [stencilAttachment setClearValue:MTLClearValueMakeStencil(0)];
+            [stencilAttachment setStoreAction: MTLStoreActionDontCare];
+            
+        }
+    } //stencil
+    
+    return stencilAttachment;
+}
+
+#pragma mark -
+
+- (instancetype)initWithMetalView:(MetalView *)metalView
+{
+    self = [super init];
+    // setting this to yes will allow Main thread to display framebuffer when
+    // view:setNeedDisplay: is called by main thread
+    _metalLayer = (CAMetalLayer *)metalView.layer;
+    
+    _metalLayer.presentsWithTransaction = NO;
+    _metalLayer.drawsAsynchronously     = YES;
+    
+    _device = MTLCreateSystemDefaultDevice();
+    
+    _depthPixelFormat   = MTLPixelFormatDepth32Float;
+    _stencilPixelFormat = MTLPixelFormatInvalid;
+    _sampleCount        = 4;
+    
+    _metalLayer.device          = _device;
+    _metalLayer.pixelFormat     = MTLPixelFormatBGRA8Unorm;
+    _metalLayer.framebufferOnly = YES;
+    
+    _drawableSize = metalView.bounds.size;
+    
+    return self;
+}
+
+- (void) releaseTextures
+{
+    _depthTex   = nil;
+    _stencilTex = nil;
+    _msaaTex    = nil;
+}
+
+- (void) display
+{
+    // Create autorelease pool per frame to avoid possible deadlock situations
+    // because there are 3 CAMetalDrawables sitting in an autorelease pool.
+    
+    @autoreleasepool
+    {
+        if(_layerSizeDidUpdate)
+        {
+            
+            _metalLayer.drawableSize = _drawableSize;
+            _layerSizeDidUpdate = NO;
+        }
+        
+        // draw
+        _currentDrawable    = nil;
+    }
+}
+
+- (void) setupRenderPassDescriptorForTexture:(id <MTLTexture>) texture
+{
+    // create lazily
+    if (_renderPassDescriptor == nil)
+        _renderPassDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
+    
+    // create a color attachment every frame since we have to recreate the texture every frame
+    MTLRenderPassAttachmentDescriptor *colorAttachment = [MTLRenderPassAttachmentDescriptor new];
+    colorAttachment.texture = texture;
+    
+    // make sure to clear every frame for best performance
+    [colorAttachment setLoadAction:MTLLoadActionClear];
+    [colorAttachment setClearValue:MTLClearValueMakeColor(0.65f, 0.65f, 0.65f, 1.0f)];
+    
+    // if sample count is greater than 1, render into using MSAA, then resolve into our color texture
+    if(_sampleCount > 1)
+    {
+        BOOL doUpdate =     ( _msaaTex.width       != texture.width  )
+        ||  ( _msaaTex.height      != texture.height )
+        ||  ( _msaaTex.sampleCount != _sampleCount   );
+        
+        if(!_msaaTex || (_msaaTex && doUpdate))
+        {
+            MTLTextureDescriptor* desc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat: MTLPixelFormatBGRA8Unorm
+                                                                                            width: texture.width
+                                                                                           height: texture.height
+                                                                                        mipmapped: NO];
+            desc.textureType = MTLTextureType2DMultisample;
+            
+            // sample count was specified to the view by the renderer.
+            // this must match the sample count given to any pipeline state using this render pass descriptor
+            desc.sampleCount = _sampleCount;
+            
+            _msaaTex = [_device newTextureWithDescriptor: desc];
+        }
+        
+        // When multisampling, perform rendering to _msaaTex, then resolve
+        // to 'texture' at the end of the scene
+        [colorAttachment setTexture: _msaaTex];
+        [colorAttachment setResolveTexture: texture];
+        
+        // set store action to resolve in this case
+        [colorAttachment setStoreAction: MTLStoreActionMultisampleResolve];
+    }
+    else
+    {
+        // store only attachments that will be presented to the screen, as in this case
+        [colorAttachment setStoreAction: MTLStoreActionStore];
+    } // color0
+    
+    // set the newly created attachment on the descriptor as color attachment at index 0
+    [_renderPassDescriptor.colorAttachments setObject:colorAttachment atIndexedSubscript:0];
+    
+    
+    // Now create the depth and stencil attachments
+    
+    if(_depthPixelFormat != MTLPixelFormatInvalid)
+    {
+        BOOL doUpdate =     ( _depthTex.width       != texture.width  )
+        ||  ( _depthTex.height      != texture.height )
+        ||  ( _depthTex.sampleCount != _sampleCount   );
+        
+        if(!_depthTex || doUpdate)
+        {
+            //  If we need a depth texture and don't have one, or if the depth texture we have is the wrong size
+            //  Then allocate one of the proper size
+            MTLTextureDescriptor* desc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat: _depthPixelFormat
+                                                                                            width: texture.width
+                                                                                           height: texture.height
+                                                                                        mipmapped: NO];
+            
+            desc.textureType = (_sampleCount > 1) ? MTLTextureType2DMultisample : MTLTextureType2D;
+            desc.sampleCount = _sampleCount;
+            
+            _depthTex = [_device newTextureWithDescriptor: desc];
+            
+            MTLRenderPassAttachmentDescriptor *depthAttachment = [MTLRenderPassAttachmentDescriptor new];
+            depthAttachment.texture = _depthTex;
+            [depthAttachment setLoadAction:MTLLoadActionClear];
+            [depthAttachment setClearValue:MTLClearValueMakeDepth(1.0)];
+            [depthAttachment setStoreAction: MTLStoreActionDontCare];
+            
+            _renderPassDescriptor.depthAttachment = depthAttachment;
+        }
+    } // depth
+    
+    if(_stencilPixelFormat != MTLPixelFormatInvalid)
+    {
+        BOOL doUpdate  =    ( _stencilTex.width       != texture.width  )
+        ||  ( _stencilTex.height      != texture.height )
+        ||  ( _stencilTex.sampleCount != _sampleCount   );
+        
+        if(!_stencilTex || doUpdate)
+        {
+            //  If we need a stencil texture and don't have one, or if the depth texture we have is the wrong size
+            //  Then allocate one of the proper size
+            
+            MTLTextureDescriptor* desc = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat: _stencilPixelFormat
+                                                                                            width: texture.width
+                                                                                           height: texture.height
+                                                                                        mipmapped: NO];
+            
+            desc.textureType = (_sampleCount > 1) ? MTLTextureType2DMultisample : MTLTextureType2D;
+            desc.sampleCount = _sampleCount;
+            
+            _stencilTex = [_device newTextureWithDescriptor: desc];
+            
+            MTLRenderPassAttachmentDescriptor* stencilAttachment = [MTLRenderPassAttachmentDescriptor new];
+            stencilAttachment.texture = _stencilTex;
+            [stencilAttachment setLoadAction:MTLLoadActionClear];
+            [stencilAttachment setClearValue:MTLClearValueMakeStencil(0)];
+            [stencilAttachment setStoreAction: MTLStoreActionDontCare];
+            
+            _renderPassDescriptor.stencilAttachment = stencilAttachment;
+            
+        }
+    } //stencil
+}
+
+- (MTLRenderPassDescriptor *) renderPassDescriptor
+{
+    id <CAMetalDrawable> drawable = self.currentDrawable;
+    if(!drawable)
+    {
+        NSLog(@">> ERROR: Failed to get a drawable!");
+        _renderPassDescriptor = nil;
+    }
+    else
+    {
+        [self setupRenderPassDescriptorForTexture: drawable.texture];
+    }
+    
+    return _renderPassDescriptor;
+}
+
+
+- (id <CAMetalDrawable>) currentDrawable
+{
+    while (_currentDrawable == nil)
+    {
+        _currentDrawable = [_metalLayer newDrawable];
+        
+        if(!_currentDrawable)
+        {
+            NSLog(@"CurrentDrawable is nil");
+        }
+    }
+    
+    return _currentDrawable;
+}
+
+@end
