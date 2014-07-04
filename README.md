@@ -20,7 +20,7 @@ Model importing script Obj_Convert.py
 
 In part 5 i wrote simple python script which parse OBJ file (generated from Blender or any other 3D model tool) and produce Swift class and txt file.
 
-Here are steps on how I used it to get that Ram rendered.
+Here are steps on how I used it to get that Ram rendered. Here's a link to free 3D model http://www.3dvia.com/models/67EC495D6F415365/ramiro-the-ram, thanks to dipsy.
 
 1. Put your OBJ and MTL file (generated from Blender) into one folder
 ![alt tag](http://cl.ly/image/012R0p303g2J/Screen%20Shot%202014-07-04%20at%2012.14.22%20AM.png) 
