@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc class Square: Model {
+@objc class Square: Node {
     
     init(baseEffect: BaseEffect)
     {

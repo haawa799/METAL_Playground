@@ -10,12 +10,17 @@ import UIKit
 import Metal
 import QuartzCore
 
-@objc class Model: NSObject
+
+@objc class Node: NSObject
 {
+    class var numberOfUniformBuffersToUse:Int {
+        return 3
+    }
+    
     var time:CFTimeInterval = 0.0
     
     var baseEffect: BaseEffect
-    let name: String
+    var name: String
     var vertexCount: Int
     var texture: MTLTexture?
     var depthState: MTLDepthStencilState?
@@ -29,6 +34,8 @@ import QuartzCore
     var rotationZ:Float = 0.0
     var scale:Float     = 1.0
     
+    var children:Array<Node> = Array<Node>()
+    
     var vertexBuffer: MTLBuffer?
     var uniformBufferGenerator: AnyObject
     var uniformsBuffer: MTLBuffer?
@@ -39,26 +46,34 @@ import QuartzCore
     var specularIntensity: Float = 1.0
     var shininess: Float = 1.0
     
-    var avaliableUniformBuffers = dispatch_semaphore_create(3)
+    var avaliableUniformBuffers = dispatch_semaphore_create(numberOfUniformBuffersToUse)
     
     init(name: String,
         baseEffect: BaseEffect,
-        vertices: Array<Vertex>,
+        vertices: Array<Vertex>?,
         vertexCount: Int,
-        textureName: String)
+        textureName: String?)
     {
-        var mTexture:METLTexture = METLTexture(resourceName: textureName.pathComponents[0], ext: textureName.pathComponents[1])
-        mTexture.finalize(baseEffect.device)
+        //Setup texture if present
+        if let texName = textureName
+        {
+            var mTexture:METLTexture = METLTexture(resourceName: texName.pathComponents[0], ext: texName.pathComponents[1])
+            mTexture.finalize(baseEffect.device)
+            self.texture = mTexture.texture
+        }
         
         self.name = name
         self.baseEffect = baseEffect
         self.vertexCount = vertexCount
-        self.texture = mTexture.texture
-        self.uniformBufferGenerator = UniformsBufferGenerator(numberOfInflightBuffers: 3, withDevice: baseEffect.device)
+        
+        self.uniformBufferGenerator = UniformsBufferGenerator(numberOfInflightBuffers: CInt(Node.numberOfUniformBuffersToUse), withDevice: baseEffect.device)
         
         super.init()
         
-        self.vertexBuffer = generateVertexBuffer(vertices, vertexCount: vertexCount, device: baseEffect.device)
+        if let trueVertices = vertices
+        {
+            self.vertexBuffer = generateVertexBuffer(trueVertices, vertexCount: vertexCount, device: baseEffect.device)
+        }
         self.samplerState = generateSamplerStateForTexture(baseEffect.device)
         
         var depthStateDesc = MTLDepthStencilDescriptor()
@@ -67,50 +82,71 @@ import QuartzCore
         depthState = baseEffect.device.newDepthStencilStateWithDescriptor(depthStateDesc)
     }
     
-    func render(commandQueue: MTLCommandQueue, metalView: MetalView, parentMVMatrix: AnyObject)
+    func renderQ(metalView: MetalView, parentMVMatrix: AnyObject, projectionMatrix: AnyObject, commandQueue: MTLCommandQueue, unifBuffer: MTLBuffer?)
     {
+        var commandBuffer = commandQueue.commandBuffer()
+        commandBuffer.addCompletedHandler(
+            {
+                (buffer:MTLCommandBuffer!) -> Void in
+                var q = dispatch_semaphore_signal(self.avaliableUniformBuffers)
+            })
         
         var parentModelViewMatrix: Matrix4 = parentMVMatrix as Matrix4
         var myModelViewMatrix: Matrix4 = modelMatrix() as Matrix4
         myModelViewMatrix.multiplyLeft(parentModelViewMatrix)
-        var projectionMatrix: Matrix4 = baseEffect.projectionMatrix as Matrix4
-        self.uniformsBuffer = getUniformsBuffer(myModelViewMatrix, projMatrix: projectionMatrix, baseEffect: baseEffect)
-        
-        
-        //We are using 3 uniform buffers, we need to wait in case CPU wants to write in first uniform buffer, while GPU is still using it (case when GPU is 2 frames ahead CPU)
-        dispatch_semaphore_wait(avaliableUniformBuffers, DISPATCH_TIME_FOREVER)
-        
-        var commandBuffer = commandQueue.commandBuffer()
-        commandBuffer.addCompletedHandler(
-        {
-            (buffer:MTLCommandBuffer!) -> Void in
-            var q = dispatch_semaphore_signal(self.avaliableUniformBuffers)
-        })
-        
+        uniformsBuffer = getUniformsBuffer(myModelViewMatrix, projMatrix: projectionMatrix, baseEffect: baseEffect)
         
         // Create MTLRenderCommandEncoder object which translates all states into a command for GPU
         var renderPathDescriptor = metalView.frameBuffer.renderPassDescriptor
         
         var commandEncoder:MTLRenderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPathDescriptor)
+        commandEncoder.pushDebugGroup(name)
         commandEncoder.setDepthStencilState(depthState)
-        
         commandEncoder.setRenderPipelineState(baseEffect.renderPipelineState)
+        
+        
         commandEncoder.setVertexBuffer(vertexBuffer, offset: 0, atIndex: 0)
         commandEncoder.setVertexBuffer(uniformsBuffer, offset: 0, atIndex: 1)
         commandEncoder.setFragmentTexture(self.texture, atIndex: 0)
         commandEncoder.setFragmentSamplerState(self.samplerState, atIndex: 0)
         commandEncoder.setCullMode(MTLCullMode.Front)
         commandEncoder.drawPrimitives(MTLPrimitiveType.Triangle, vertexStart: 0, vertexCount: vertexCount)
+        
+        commandEncoder.setCullMode(MTLCullMode.Front)
         commandEncoder.endEncoding()
+        
+        commandEncoder.popDebugGroup()
         
         // After command in command buffer is encoded for GPU we provide drawable that will be invoked when this command buffer has been scheduled for execution
         if let drawableAnyObject = metalView.frameBuffer.currentDrawable as? MTLDrawable
         {
-            commandBuffer.presentDrawable(drawableAnyObject);
+            commandBuffer.presentDrawable(drawableAnyObject)
         }
         
         // Commit commandBuffer to his commandQueue in which he will be executed after commands before him in queue
-        commandBuffer.commit();
+        commandBuffer.commit()
+    }
+    
+    func render(commandQueue: MTLCommandQueue, metalView: MetalView, parentMVMatrix: AnyObject)
+    {
+        var parentModelViewMatrix: Matrix4 = parentMVMatrix as Matrix4
+        var myModelViewMatrix: Matrix4 = modelMatrix() as Matrix4
+        myModelViewMatrix.multiplyLeft(parentModelViewMatrix)
+        var projectionMatrix: Matrix4 = baseEffect.projectionMatrix as Matrix4
+        self.uniformsBuffer = getUniformsBuffer(myModelViewMatrix, projMatrix: projectionMatrix, baseEffect: baseEffect)
+        
+        // Render children first
+        for child in children
+        {
+            child.renderQ(metalView, parentMVMatrix: myModelViewMatrix, projectionMatrix: projectionMatrix, commandQueue: commandQueue, unifBuffer: uniformsBuffer)
+        }
+        
+        if vertexCount > 0
+        {
+            self.renderQ(metalView, parentMVMatrix: parentModelViewMatrix, projectionMatrix: projectionMatrix, commandQueue: commandQueue, unifBuffer: uniformsBuffer)
+        }
+        
+        
         
     }
     
@@ -126,6 +162,10 @@ import QuartzCore
     func updateWithDelta(delta: CFTimeInterval)
     {
         time += delta
+        for child in children
+        {
+            child.updateWithDelta(delta)
+        }
     }
     
     func generateSamplerStateForTexture(device: MTLDevice) -> MTLSamplerState?

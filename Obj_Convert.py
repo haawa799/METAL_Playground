@@ -72,7 +72,7 @@ numberOfVertices = len(facesList)
 
 swiftFilePath = fileNameObj.replace('obj','swift')
 fileSwift = open(swiftFilePath,'w')
-fileSwift.write('import UIKit' + '\n\n' + '@objc class ' + className + ': Model {')
+fileSwift.write('import UIKit' + '\n\n' + '@objc class ' + className + ': Node {')
 fileSwift.write('\n\n    init(baseEffect: BaseEffect)\n    {\n')
 
 fileSwift.write('\n        var verticesArray:Array<Vertex> = []\n')

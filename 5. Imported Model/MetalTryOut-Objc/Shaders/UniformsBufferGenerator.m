@@ -53,7 +53,7 @@ static const int kLightIntensityComponents  = 4;
 - (id <MTLBuffer>)bufferWithProjectionMatrix:(Matrix4 *)projMatrix
                              modelViewMatrix:(Matrix4 *)mvMatrix
                               withBaseEffect:(BaseEffect *)baseEffect
-                                   withModel:(Model *)model
+                                   withModel:(Node *)node
 {
     
     float color[4] = {baseEffect.lightColor.red,baseEffect.lightColor.green,baseEffect.lightColor.blue,baseEffect.lightColor.alpha};
@@ -83,10 +83,10 @@ static const int kLightIntensityComponents  = 4;
     {
         uniformFloatsBuffer[counter++] = [baseEffect.lightDirection[i] floatValue];
     }
-    uniformFloatsBuffer[counter++] = model.ambientIntensity;
-    uniformFloatsBuffer[counter++] = model.diffuseIntensity;
-    uniformFloatsBuffer[counter++] = model.specularIntensity;
-    uniformFloatsBuffer[counter++] = model.shininess;
+    uniformFloatsBuffer[counter++] = node.ambientIntensity;
+    uniformFloatsBuffer[counter++] = node.diffuseIntensity;
+    uniformFloatsBuffer[counter++] = node.specularIntensity;
+    uniformFloatsBuffer[counter++] = node.shininess;
     
     id <MTLBuffer> uniformBuffer = self.buffers[self.indexOfAvaliableBuffer++];
     if(self.indexOfAvaliableBuffer == self.numberOfInflightBuffers)

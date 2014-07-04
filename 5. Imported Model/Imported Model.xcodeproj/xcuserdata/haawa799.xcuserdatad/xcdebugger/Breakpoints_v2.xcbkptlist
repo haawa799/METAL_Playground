@@ -145,22 +145,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MetalTryOut-Objc/Nodes/Model.swift"
-            timestampString = "426076381.983746"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "render(_:metalView:parentMVMatrix:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MetalTryOut-Objc/Main/FrameBuffer.m"
             timestampString = "426080663.118721"
             startingColumnNumber = "9223372036854775807"
@@ -193,13 +177,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MetalTryOut-Objc/Nodes/Model.swift"
-            timestampString = "426081231.785402"
+            filePath = "MetalTryOut-Objc/Main/MetalView.swift"
+            timestampString = "426154089.859874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "render(_:metalView:parentMVMatrix:)"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "display()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

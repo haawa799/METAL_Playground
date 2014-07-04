@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc class Cube: Model {
+@objc class Cube: Node {
     
     
     init(baseEffect: BaseEffect)

@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <scenes>
-        <!--Metal View Controller-->
+        <!--My Scene View Controller-->
         <scene sceneID="3qw-8C-YgM">
             <objects>
-                <viewController id="yRV-ez-iVL" customClass="MetalViewController" customModule="Imported_Model" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yRV-ez-iVL" customClass="MySceneViewController" customModule="Imported_Model" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="22q-vg-WOA"/>
                         <viewControllerLayoutGuide type="bottom" id="SED-31-Uaa"/>

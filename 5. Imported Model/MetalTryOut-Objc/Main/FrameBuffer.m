@@ -39,7 +39,7 @@
     
     _depthPixelFormat   = MTLPixelFormatDepth32Float;
     _stencilPixelFormat = MTLPixelFormatInvalid;
-    _sampleCount        = 1;
+    _sampleCount        = 4;
     
     _metalLayer.device          = _device;
     _metalLayer.pixelFormat     = MTLPixelFormatBGRA8Unorm;
