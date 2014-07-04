@@ -39,4 +39,13 @@ class TestScene: Node {
         
         rotationY += Float(M_PI/8) * Float(delta)
     }
+    
+    override func render(commandQueue: MTLCommandQueue, metalView: MetalView, parentMVMatrix: AnyObject)
+    {
+        for child in children
+        {
+            child.render(commandQueue, metalView: metalView, parentMVMatrix: modelMatrix())
+        }
+    }
+    
 }
