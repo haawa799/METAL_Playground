@@ -22,6 +22,7 @@
 		435244E2195AC56B00D62D63 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244DD195AC56B00D62D63 /* Vertex.swift */; };
 		435244E3195AC56B00D62D63 /* VertexBufferGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 435244DF195AC56B00D62D63 /* VertexBufferGenerator.m */; };
 		435244E6195AC66800D62D63 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435244E4195AC66800D62D63 /* Node.swift */; };
+		4372B1D41967148000567EEC /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4372B1D31967148000567EEC /* Scene.swift */; };
 		437D5DA6195D649E003CCCF4 /* Matrix4.m in Sources */ = {isa = PBXBuildFile; fileRef = 437D5DA5195D649E003CCCF4 /* Matrix4.m */; };
 		438345AA1960739C00D98C92 /* METLTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 438345A91960739C00D98C92 /* METLTexture.m */; };
 		438800191965558F00043B15 /* MetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 438800181965558F00043B15 /* MetalView.swift */; };
@@ -68,6 +69,7 @@
 		435244DE195AC56B00D62D63 /* VertexBufferGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VertexBufferGenerator.h; sourceTree = "<group>"; };
 		435244DF195AC56B00D62D63 /* VertexBufferGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VertexBufferGenerator.m; sourceTree = "<group>"; };
 		435244E4195AC66800D62D63 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		4372B1D31967148000567EEC /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		437D5DA4195D649E003CCCF4 /* Matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4.h; sourceTree = "<group>"; };
 		437D5DA5195D649E003CCCF4 /* Matrix4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Matrix4.m; sourceTree = "<group>"; };
 		438345A81960739C00D98C92 /* METLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = METLTexture.h; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				437D5DA4195D649E003CCCF4 /* Matrix4.h */,
 				437D5DA5195D649E003CCCF4 /* Matrix4.m */,
 				435244E4195AC66800D62D63 /* Node.swift */,
+				4372B1D31967148000567EEC /* Scene.swift */,
 				43A481211966A07D0079B3AF /* TestScene.swift */,
 				43AD54BE195DB1E300C43C20 /* Cube.swift */,
 				43AD54BC195DAFB600C43C20 /* Square.swift */,
@@ -329,6 +332,7 @@
 				435244D6195AC04000D62D63 /* AppDelegate.swift in Sources */,
 				435244E3195AC56B00D62D63 /* VertexBufferGenerator.m in Sources */,
 				435244D8195AC04000D62D63 /* MetalViewController.swift in Sources */,
+				4372B1D41967148000567EEC /* Scene.swift in Sources */,
 				43AD54BF195DB1E300C43C20 /* Cube.swift in Sources */,
 				438C244D19660B44003DA3DB /* MySceneViewController.swift in Sources */,
 				43A481221966A07D0079B3AF /* TestScene.swift in Sources */,

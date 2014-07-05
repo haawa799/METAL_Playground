@@ -8,44 +8,43 @@
 
 import UIKit
 
-class TestScene: Node {
+class TestScene: Scene {
     
-    let ram: Ram
-    let ram1: Ram
+    
+    var sheeps: Array<Ram>
+    let numberOfSheeps = 9
     
     init(baseEffect: BaseEffect)
     {
-        ram = Ram(baseEffect: baseEffect)
-        ram1 = Ram(baseEffect: baseEffect)
-        super.init(name: "TestScene", baseEffect: baseEffect, vertices: nil, vertexCount: 0, textureName: nil)
+        sheeps = Array()
         
-        children.append(ram)
-        children.append(ram1)
+        super.init(name: "TestScene", baseEffect: baseEffect)
         
-        ram.scale = 0.5
-        ram1.scale = 0.5
-        ram1.name = "ram1"
-        ram.positionY = -2
-        ram1.positionY = 2
+        for var i = 0; i<numberOfSheeps; i++
+        {
+            var ram = Ram(baseEffect: baseEffect)
+            ram.name = "ram\(i)"
+            children.append(ram)
+            
+            var row = i / 3
+            var column = i - (3 * row)
+            var yDelta:Float = 4.0 / 4.0
+            var xDelta:Float = 2.0 / 3
+            
+            ram.positionY = -1.0 + Float(yDelta) * Float(row)
+            ram.positionX = -0.5 + Float(xDelta) * Float(column)
+            ram.scale = 0.5
+        }
         
         positionX = 0
         positionY = 0
-        positionZ = -3
+        positionZ = -4
+        scale = 1.3
     }
     
     override func updateWithDelta(delta: CFTimeInterval)
     {
         super.updateWithDelta(delta)
-        
-        rotationY += Float(M_PI/8) * Float(delta)
-    }
-    
-    override func render(commandQueue: MTLCommandQueue, metalView: MetalView, parentMVMatrix: AnyObject)
-    {
-        for child in children
-        {
-            child.render(commandQueue, metalView: metalView, parentMVMatrix: modelMatrix())
-        }
-    }
+    }    
     
 }

@@ -14,7 +14,7 @@ import QuartzCore
 @objc class Node: NSObject
 {
     class var numberOfUniformBuffersToUse:Int {
-        return 3
+        return 3*10
     }
     
     var time:CFTimeInterval = 0.0
@@ -74,6 +74,7 @@ import QuartzCore
         {
             self.vertexBuffer = generateVertexBuffer(trueVertices, vertexCount: vertexCount, device: baseEffect.device)
         }
+//        vertices.removeAll(keepCapacity: false)
         self.samplerState = generateSamplerStateForTexture(baseEffect.device)
         
         var depthStateDesc = MTLDepthStencilDescriptor()
@@ -82,96 +83,25 @@ import QuartzCore
         depthState = baseEffect.device.newDepthStencilStateWithDescriptor(depthStateDesc)
     }
     
-    func renderQ(metalView: MetalView, parentMVMatrix: AnyObject, projectionMatrix: AnyObject, commandQueue: MTLCommandQueue, unifBuffer: MTLBuffer?)
+    func renderNode(node: Node, parentMatrix: AnyObject, projectionMatrix: AnyObject, commandEncoder: MTLRenderCommandEncoder, frameUniformsBuffer: MTLBuffer)
     {
-        var commandBuffer = commandQueue.commandBuffer()
-        commandBuffer.addCompletedHandler(
-            {
-                (buffer:MTLCommandBuffer!) -> Void in
-                var q = dispatch_semaphore_signal(self.avaliableUniformBuffers)
-            })
+        commandEncoder.pushDebugGroup(node.name)
         
-        var parentModelViewMatrix: Matrix4 = parentMVMatrix as Matrix4
-        var myModelViewMatrix: Matrix4 = modelMatrix() as Matrix4
-        myModelViewMatrix.multiplyLeft(parentModelViewMatrix)
-        uniformsBuffer = getUniformsBuffer(myModelViewMatrix, projMatrix: projectionMatrix, baseEffect: baseEffect)
+        for child in node.children
+        {
+            child.renderNode(node, parentMatrix: node.modelMatrix(), projectionMatrix: projectionMatrix, commandEncoder: commandEncoder, frameUniformsBuffer: frameUniformsBuffer)
+        }
         
-        // Create MTLRenderCommandEncoder object which translates all states into a command for GPU
-        var renderPathDescriptor = metalView.frameBuffer.renderPassDescriptor
-        
-        var commandEncoder:MTLRenderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPathDescriptor)
-        commandEncoder.pushDebugGroup(name)
-        commandEncoder.setDepthStencilState(depthState)
-        commandEncoder.setRenderPipelineState(baseEffect.renderPipelineState)
-        
-        
-        commandEncoder.setVertexBuffer(vertexBuffer, offset: 0, atIndex: 0)
+        var nodeModelMatrix: Matrix4 = node.modelMatrix() as Matrix4
+        nodeModelMatrix.multiplyLeft(parentMatrix as Matrix4)
+        var uniform = frameUniformsBuffer
+        uniformsBuffer = getUniformsBuffer(nodeModelMatrix, projMatrix: projectionMatrix, baseEffect: node.baseEffect)
+        commandEncoder.setVertexBuffer(node.vertexBuffer, offset: 0, atIndex: 0)
         commandEncoder.setVertexBuffer(uniformsBuffer, offset: 0, atIndex: 1)
-        commandEncoder.setFragmentTexture(self.texture, atIndex: 0)
-        commandEncoder.setFragmentSamplerState(self.samplerState, atIndex: 0)
-        commandEncoder.setCullMode(MTLCullMode.Front)
-        commandEncoder.drawPrimitives(MTLPrimitiveType.Triangle, vertexStart: 0, vertexCount: vertexCount)
-        
-        commandEncoder.setCullMode(MTLCullMode.Front)
-        commandEncoder.endEncoding()
+        commandEncoder.setFragmentTexture(node.texture, atIndex: 0)
+        commandEncoder.drawPrimitives(MTLPrimitiveType.Triangle, vertexStart: 0, vertexCount: node.vertexCount)
         
         commandEncoder.popDebugGroup()
-        
-        // After command in command buffer is encoded for GPU we provide drawable that will be invoked when this command buffer has been scheduled for execution
-        if let drawableAnyObject = metalView.frameBuffer.currentDrawable as? MTLDrawable
-        {
-            commandBuffer.presentDrawable(drawableAnyObject)
-        }
-        
-        // Commit commandBuffer to his commandQueue in which he will be executed after commands before him in queue
-        commandBuffer.commit()
-    }
-    
-    func render(commandQueue: MTLCommandQueue, metalView: MetalView, parentMVMatrix: AnyObject)
-    {
-        
-        var parentModelViewMatrix: Matrix4 = parentMVMatrix as Matrix4
-        var myModelViewMatrix: Matrix4 = modelMatrix() as Matrix4
-        myModelViewMatrix.multiplyLeft(parentModelViewMatrix)
-        var projectionMatrix: Matrix4 = baseEffect.projectionMatrix as Matrix4
-        self.uniformsBuffer = getUniformsBuffer(myModelViewMatrix, projMatrix: projectionMatrix, baseEffect: baseEffect)
-        
-        
-        //We are using 3 uniform buffers, we need to wait in case CPU wants to write in first uniform buffer, while GPU is still using it (case when GPU is 2 frames ahead CPU)
-        dispatch_semaphore_wait(avaliableUniformBuffers, DISPATCH_TIME_FOREVER)
-        
-        var commandBuffer = commandQueue.commandBuffer()
-        commandBuffer.addCompletedHandler(
-            {
-                (buffer:MTLCommandBuffer!) -> Void in
-                var q = dispatch_semaphore_signal(self.avaliableUniformBuffers)
-            })
-        
-        
-        // Create MTLRenderCommandEncoder object which translates all states into a command for GPU
-        var renderPathDescriptor = metalView.frameBuffer.renderPassDescriptor
-        
-        var commandEncoder:MTLRenderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPathDescriptor)
-        commandEncoder.setDepthStencilState(depthState)
-        
-        commandEncoder.setRenderPipelineState(baseEffect.renderPipelineState)
-        commandEncoder.setVertexBuffer(vertexBuffer, offset: 0, atIndex: 0)
-        commandEncoder.setVertexBuffer(uniformsBuffer, offset: 0, atIndex: 1)
-        commandEncoder.setFragmentTexture(self.texture, atIndex: 0)
-        commandEncoder.setFragmentSamplerState(self.samplerState, atIndex: 0)
-        commandEncoder.setCullMode(MTLCullMode.Front)
-        commandEncoder.drawPrimitives(MTLPrimitiveType.Triangle, vertexStart: 0, vertexCount: vertexCount)
-        commandEncoder.endEncoding()
-        
-        // After command in command buffer is encoded for GPU we provide drawable that will be invoked when this command buffer has been scheduled for execution
-        if let drawableAnyObject = metalView.frameBuffer.currentDrawable as? MTLDrawable
-        {
-            commandBuffer.presentDrawable(drawableAnyObject);
-        }
-        
-        // Commit commandBuffer to his commandQueue in which he will be executed after commands before him in queue
-        commandBuffer.commit();
-        
     }
     
     func modelMatrix() -> AnyObject //AnyObject is used as a workaround against comiler error, waiting for fix in following betas

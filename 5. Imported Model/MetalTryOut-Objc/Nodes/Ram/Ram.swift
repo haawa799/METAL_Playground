@@ -21,6 +21,8 @@ import UIKit
 
         super.init(name: "Ram", baseEffect: baseEffect, vertices: verticesArray, vertexCount: verticesArray.count, textureName: "char_ram_col.jpg")
 
+        verticesArray.removeAll(keepCapacity: false)
+        
         self.ambientIntensity = 0.400000
         self.diffuseIntensity = 0.8
         self.specularIntensity = 0.200000
@@ -28,6 +30,14 @@ import UIKit
         
         self.rotationX = Matrix4.degreesToRad(-90.0)
 
+    }
+    
+    override func updateWithDelta(delta: CFTimeInterval)
+    {
+        super.updateWithDelta(delta)
+        
+        //        rotationZ += Float(M_PI/10) * Float(delta)
+        rotationZ += Float(M_PI/8) * Float(delta)
     }
 
 }
