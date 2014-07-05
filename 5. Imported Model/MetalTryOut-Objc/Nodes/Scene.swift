@@ -28,6 +28,8 @@ class Scene: Node {
         //We are using 3 uniform buffers, we need to wait in case CPU wants to write in first uniform buffer, while GPU is still using it (case when GPU is 2 frames ahead CPU)
         dispatch_semaphore_wait(avaliableUniformBuffers, DISPATCH_TIME_FOREVER)
         
+        
+        var renderPathDescriptor = metalView.frameBuffer.renderPassDescriptor
         var commandBuffer = commandQueue.commandBuffer()
         commandBuffer.addCompletedHandler(
             {
@@ -36,33 +38,27 @@ class Scene: Node {
             })
         
         
-        // Create MTLRenderCommandEncoder object which translates all states into a command for GPU
-        var renderPathDescriptor = metalView.frameBuffer.renderPassDescriptor
+        var shouldEndEncodingOnLastChild = vertexCount <= 0
+        var commandEncoder: MTLRenderCommandEncoder? = nil
         
-        var commandEncoder:MTLRenderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPathDescriptor)
-        commandEncoder.setDepthStencilState(depthState)
-        commandEncoder.setRenderPipelineState(baseEffect.renderPipelineState)
-        commandEncoder.setFragmentSamplerState(samplerState, atIndex: 0)
-        commandEncoder.setCullMode(MTLCullMode.Front)
-        //
-        
-        for child in children
+        for var i = 0; i < children.count; i++
         {
-            renderNode(child, parentMatrix: myModelViewMatrix, projectionMatrix: projectionMatrix, commandEncoder: commandEncoder, frameUniformsBuffer: uniformsBuffer!)
+            var child = children[i]
+            var lastChild = i == children.count - 1
+            commandEncoder = renderNode(child, parentMatrix: myModelViewMatrix, projectionMatrix: projectionMatrix, renderPassDescriptor: renderPathDescriptor, commandBuffer: commandBuffer, encoder: commandEncoder)
         }
         
         if vertexCount > 0
         {
-            renderNode(self, parentMatrix: parentModelViewMatrix, projectionMatrix: projectionMatrix, commandEncoder: commandEncoder, frameUniformsBuffer: uniformsBuffer!)
+            commandEncoder = renderNode(self, parentMatrix: parentModelViewMatrix, projectionMatrix: projectionMatrix, renderPassDescriptor: renderPathDescriptor, commandBuffer: commandBuffer, encoder: commandEncoder)
         }
         
-        commandEncoder.endEncoding()
-        
-        // After command in command buffer is encoded for GPU we provide drawable that will be invoked when this command buffer has been scheduled for execution
         if let drawableAnyObject = metalView.frameBuffer.currentDrawable as? MTLDrawable
         {
             commandBuffer.presentDrawable(drawableAnyObject);
         }
+        
+        commandEncoder?.endEncoding()
         
         // Commit commandBuffer to his commandQueue in which he will be executed after commands before him in queue
         commandBuffer.commit();

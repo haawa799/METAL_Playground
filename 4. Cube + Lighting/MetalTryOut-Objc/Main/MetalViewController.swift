@@ -20,6 +20,7 @@ class MetalViewController: UIViewController,MetalViewProtocol {
     var renderPipeline: MTLRenderPipelineState!
     
     var cube: Cube!
+    var cube1: Cube!
     var baseEffect: BaseEffect!
     
     deinit{
@@ -59,6 +60,7 @@ class MetalViewController: UIViewController,MetalViewProtocol {
         baseEffect.projectionMatrix = Matrix4.makePerspectiveViewAngle(Matrix4.degreesToRad(85.0), aspectRatio: ratio, nearZ: 1.0, farZ: 150.0)
         
         cube = Cube(baseEffect: baseEffect)
+        cube1 = Cube(baseEffect: baseEffect)
         renderPipeline = baseEffect.compile()
     }
     
@@ -66,6 +68,7 @@ class MetalViewController: UIViewController,MetalViewProtocol {
         commandQ = nil
         renderPipeline = nil
         cube = nil
+        cube1 = nil
         baseEffect = nil
     }
     
@@ -80,8 +83,11 @@ class MetalViewController: UIViewController,MetalViewProtocol {
             matrix.translate(0, y: 0, z: -5)
             matrix.rotateAroundX(Matrix4.degreesToRad(20.0), y: 0, z: 0)
             cube.render(commandQ, drawable: drawable, parentMVMatrix: matrix)
+            matrix.translate(0, y: -2, z: -5)
+            cube1.render(commandQ, drawable: drawable, parentMVMatrix: matrix)
         }
         
         cube.updateWithDelta(delta)
+        cube1.updateWithDelta(delta*2)
     }
 }

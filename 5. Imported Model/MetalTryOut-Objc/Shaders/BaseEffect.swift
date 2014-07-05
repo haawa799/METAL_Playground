@@ -32,11 +32,15 @@ import Metal
         pipeLineDescriptor.depthWriteEnabled = true
         pipeLineDescriptor.sampleCount = 4
         pipeLineDescriptor.depthAttachmentPixelFormat = MTLPixelFormat.FormatDepth32Float
+        pipeLineDescriptor.visibilityResultEnabled = true
         
-        var colorDescriptor = MTLRenderPipelineAttachmentDescriptor()
-        colorDescriptor.pixelFormat = .FormatBGRA8Unorm
+//        var colorDescriptor = MTLRenderPipelineAttachmentDescriptor()
+//        colorDescriptor.pixelFormat = .FormatBGRA8Unorm
+//        
+//        var depthDescriptor = MTLRenderPipelineAttachmentDescriptor()
+//        depthDescriptor.pixelFormat = .FormatBGRA8Unorm
         
-        pipeLineDescriptor.colorAttachments[0] = colorDescriptor
+//        pipeLineDescriptor.colorAttachments[0] = colorDescriptor
         
         super.init()
     }

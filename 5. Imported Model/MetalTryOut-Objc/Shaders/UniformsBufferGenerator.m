@@ -96,7 +96,6 @@ static const int kLightIntensityComponents  = 4;
     uint8_t *bufferPointer = (uint8_t *)[uniformBuffer contents];
     
     memcpy(bufferPointer, &uniformFloatsBuffer, sizeof(uniformFloatsBuffer));
-    bufferPointer += sizeof(uniformFloatsBuffer);
     
     return uniformBuffer;
 }

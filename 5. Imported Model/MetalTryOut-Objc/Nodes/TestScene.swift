@@ -32,13 +32,13 @@ class TestScene: Scene {
             var xDelta:Float = 2.0 / 3
             
             ram.positionY = -1.0 + Float(yDelta) * Float(row)
-            ram.positionX = -0.5 + Float(xDelta) * Float(column)
+            ram.positionX = -0.6 + Float(xDelta) * Float(column)
             ram.scale = 0.5
         }
         
         positionX = 0
         positionY = 0
-        positionZ = -4
+        positionZ = -3
         scale = 1.3
     }
     

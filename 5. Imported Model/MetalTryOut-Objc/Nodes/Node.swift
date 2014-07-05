@@ -83,25 +83,43 @@ import QuartzCore
         depthState = baseEffect.device.newDepthStencilStateWithDescriptor(depthStateDesc)
     }
     
-    func renderNode(node: Node, parentMatrix: AnyObject, projectionMatrix: AnyObject, commandEncoder: MTLRenderCommandEncoder, frameUniformsBuffer: MTLBuffer)
+    func renderNode(node: Node, parentMatrix: AnyObject, projectionMatrix: AnyObject, renderPassDescriptor: MTLRenderPassDescriptor, commandBuffer: MTLCommandBuffer, encoder: MTLRenderCommandEncoder?) -> MTLRenderCommandEncoder
     {
+        var commandEncoder:MTLRenderCommandEncoder
+        
+        if encoder == nil
+        {
+            commandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPassDescriptor)
+            commandEncoder.setDepthStencilState(depthState)
+            commandEncoder.setRenderPipelineState(baseEffect.renderPipelineState)
+            commandEncoder.setFragmentSamplerState(samplerState, atIndex: 0)
+            commandEncoder.setCullMode(MTLCullMode.Front)
+        }
+        else
+        {
+            commandEncoder = encoder!
+        }
+        
+        
         commandEncoder.pushDebugGroup(node.name)
         
         for child in node.children
         {
-            child.renderNode(node, parentMatrix: node.modelMatrix(), projectionMatrix: projectionMatrix, commandEncoder: commandEncoder, frameUniformsBuffer: frameUniformsBuffer)
+            child.renderNode(node, parentMatrix: parentMatrix, projectionMatrix: projectionMatrix, renderPassDescriptor: renderPassDescriptor, commandBuffer: commandBuffer, encoder: commandEncoder)
         }
         
         var nodeModelMatrix: Matrix4 = node.modelMatrix() as Matrix4
         nodeModelMatrix.multiplyLeft(parentMatrix as Matrix4)
-        var uniform = frameUniformsBuffer
-        uniformsBuffer = getUniformsBuffer(nodeModelMatrix, projMatrix: projectionMatrix, baseEffect: node.baseEffect)
+        var uniform = getUniformsBuffer(nodeModelMatrix, projMatrix: projectionMatrix, baseEffect: node.baseEffect)
         commandEncoder.setVertexBuffer(node.vertexBuffer, offset: 0, atIndex: 0)
         commandEncoder.setVertexBuffer(uniformsBuffer, offset: 0, atIndex: 1)
         commandEncoder.setFragmentTexture(node.texture, atIndex: 0)
         commandEncoder.drawPrimitives(MTLPrimitiveType.Triangle, vertexStart: 0, vertexCount: node.vertexCount)
         
+        
         commandEncoder.popDebugGroup()
+        
+        return commandEncoder
     }
     
     func modelMatrix() -> AnyObject //AnyObject is used as a workaround against comiler error, waiting for fix in following betas

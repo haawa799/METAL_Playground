@@ -16,6 +16,7 @@ import UIKit
                 var vertex = Vertex(text: line)
                 verticesArray.append(vertex)
             }
+            array.removeAll(keepCapacity: false)
         }
 
 

@@ -89,7 +89,8 @@ vertex VertexOut myVertexShader(const    global Vertex*    vertexArray   [[buffe
     
     
     VertexOut out;
-    out.position = proj_Matrix * mv_Matrix * position;
+    float4 pos = proj_Matrix * fragmentPos4;
+    out.position = pos;
     out.texCoord = vertexArray[vid].texCoord;
     out.normal = {normal[0],normal[1],normal[2]};
     out.fragmentPosition = {fragmentPos4[0],fragmentPos4[1],fragmentPos4[2]};
@@ -132,6 +133,8 @@ fragment float4 myFragmentShader(VertexOut interpolated [[stage_in]],
     float3 reflection = reflect(lightDirection,normal);
     float specularFactor = pow(max(0.0,-dot(reflection,eye)),interpolated.shininess);
     float4 specularColor = interpolated.lightColor * specularFactor * interpolated.specularIntensity;
+    
+    
     
     return (/*interpolated.color +*/ ambientColor + diffuseColor + specularColor) * tex2D.sample(sampler2D, interpolated.texCoord);
 }
