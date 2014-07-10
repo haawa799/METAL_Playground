@@ -24,7 +24,7 @@ import Metal
         var library = device.newDefaultLibrary();
         pipeLineDescriptor.vertexFunction = library.newFunctionWithName(vertexShaderName);
         pipeLineDescriptor.fragmentFunction = library.newFunctionWithName(fragmentShaderName);
-        pipeLineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormat.FormatBGRA8Unorm;
+        pipeLineDescriptor.colorAttachments[0].pixelFormat = MTLPixelFormat.BGRA8Unorm;
 //        BaseEffectSfiftFixer.setup(pipeLineDescriptor)
         
         super.init()

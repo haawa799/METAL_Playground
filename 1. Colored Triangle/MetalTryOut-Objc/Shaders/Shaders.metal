@@ -22,7 +22,7 @@ struct VertexOut
 };
 
 
-vertex VertexOut myVertexShader(const global Vertex* vertexArray [[buffer(0)]],
+vertex VertexOut myVertexShader(const device Vertex* vertexArray [[buffer(0)]],
                                 unsigned int vid [[vertex_id]])
 {
     VertexOut out;

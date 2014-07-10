@@ -10,7 +10,7 @@
     
     let rows: Int = 4
     let columns: Int = 4
-    var grid: Float[]
+    var grid: [Float]
     
     init() {
         grid = Array(count: rows * columns, repeatedValue: 0.0)
@@ -22,7 +22,7 @@
     
     func transpose()
     {
-        var tmp: Float[] = Array(count: rows * columns, repeatedValue: 0.0)
+        var tmp: [Float] = Array(count: rows * columns, repeatedValue: 0.0)
         var i,j : Int
         for i = 0; i < 4; i++
         {
@@ -39,7 +39,7 @@
     
     func multiplyMatrix(matrix: Matrix4x4)
     {
-        var tmp: Float[] = Array(count: columns, repeatedValue: 0.0)
+        var tmp: [Float] = Array(count: columns, repeatedValue: 0.0)
         for var j = 0; j < 4; j++
         {
             tmp[0] = grid[j]

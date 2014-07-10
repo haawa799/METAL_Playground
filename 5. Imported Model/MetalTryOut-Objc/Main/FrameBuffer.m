@@ -85,12 +85,12 @@
         _renderPassDescriptor = [MTLRenderPassDescriptor renderPassDescriptor];
     
     // create a color attachment every frame since we have to recreate the texture every frame
-    MTLRenderPassAttachmentDescriptor *colorAttachment = [MTLRenderPassAttachmentDescriptor new];
+    MTLRenderPassColorAttachmentDescriptor *colorAttachment = [MTLRenderPassColorAttachmentDescriptor new];
     colorAttachment.texture = texture;
     
     // make sure to clear every frame for best performance
-    [colorAttachment setLoadAction:MTLLoadActionClear];
-    [colorAttachment setClearValue:MTLClearValueMakeColor(0.65f, 0.65f, 0.65f, 1.0f)];
+    colorAttachment.loadAction = MTLLoadActionClear;
+    colorAttachment.clearColor = MTLClearColorMake(0.65, 0.65, 0.65, 1.0);
     
     // if sample count is greater than 1, render into using MSAA, then resolve into our color texture
     if(_sampleCount > 1)
@@ -154,10 +154,10 @@
             
             _depthTex = [_device newTextureWithDescriptor: desc];
             
-            MTLRenderPassAttachmentDescriptor *depthAttachment = [MTLRenderPassAttachmentDescriptor new];
+            MTLRenderPassDepthAttachmentDescriptor *depthAttachment = [MTLRenderPassDepthAttachmentDescriptor new];
             depthAttachment.texture = _depthTex;
             [depthAttachment setLoadAction:MTLLoadActionClear];
-            [depthAttachment setClearValue:MTLClearValueMakeDepth(1.0)];
+            depthAttachment.clearDepth = 1.0;
             [depthAttachment setStoreAction: MTLStoreActionDontCare];
             
             _renderPassDescriptor.depthAttachment = depthAttachment;
@@ -185,10 +185,10 @@
             
             _stencilTex = [_device newTextureWithDescriptor: desc];
             
-            MTLRenderPassAttachmentDescriptor* stencilAttachment = [MTLRenderPassAttachmentDescriptor new];
+            MTLRenderPassStencilAttachmentDescriptor* stencilAttachment = [MTLRenderPassStencilAttachmentDescriptor new];
             stencilAttachment.texture = _stencilTex;
             [stencilAttachment setLoadAction:MTLLoadActionClear];
-            [stencilAttachment setClearValue:MTLClearValueMakeStencil(0)];
+            stencilAttachment.clearStencil = 0;
             [stencilAttachment setStoreAction: MTLStoreActionDontCare];
             
             _renderPassDescriptor.stencilAttachment = stencilAttachment;

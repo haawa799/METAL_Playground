@@ -102,7 +102,7 @@ import Metal
         var device = MTLCreateSystemDefaultDevice()
         
         _metalLayer.device          = device
-        _metalLayer.pixelFormat     = MTLPixelFormat.FormatBGRA8Unorm
+        _metalLayer.pixelFormat     = MTLPixelFormat.BGRA8Unorm
         _metalLayer.framebufferOnly = true
         
         frameBuffer = FrameBuffer(metalView: self)

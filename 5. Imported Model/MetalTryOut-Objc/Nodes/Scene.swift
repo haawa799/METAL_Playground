@@ -53,10 +53,7 @@ class Scene: Node {
             commandEncoder = renderNode(self, parentMatrix: parentModelViewMatrix, projectionMatrix: projectionMatrix, renderPassDescriptor: renderPathDescriptor, commandBuffer: commandBuffer, encoder: commandEncoder)
         }
         
-        if let drawableAnyObject = metalView.frameBuffer.currentDrawable as? MTLDrawable
-        {
-            commandBuffer.presentDrawable(drawableAnyObject);
-        }
+        commandBuffer.presentDrawable(metalView.frameBuffer.currentDrawable)
         
         commandEncoder?.endEncoding()
         

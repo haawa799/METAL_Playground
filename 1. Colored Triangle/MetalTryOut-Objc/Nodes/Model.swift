@@ -47,17 +47,14 @@ import QuartzCore
         var commandEncoder:MTLRenderCommandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPassDesc)
         commandEncoder.setRenderPipelineState(baseEffect.renderPipelineState)
         commandEncoder.setVertexBuffer(vertexBuffer, offset: 0, atIndex: 0)
-        commandEncoder.drawPrimitives(MTLPrimitiveType.Triangle, vertexStart: 0, vertexCount: vertexCount);
-        commandEncoder.endEncoding();
+        commandEncoder.drawPrimitives(MTLPrimitiveType.Triangle, vertexStart: 0, vertexCount: vertexCount)
+        commandEncoder.endEncoding()
         
         // After command in command buffer is encoded for GPU we provide drawable that will be invoked when this command buffer has been scheduled for execution
-        if let drawableAnyObject = drawable as? MTLDrawable
-        {
-            commandBuffer.presentDrawable(drawableAnyObject);
-        }
+        commandBuffer.presentDrawable(drawable)
         
         // Commit commandBuffer to his commandQueue in which he will be executed after commands before him in queue
-        commandBuffer.commit();
+        commandBuffer.commit()
         
     }
     

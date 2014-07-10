@@ -86,19 +86,18 @@ import QuartzCore
     func renderNode(node: Node, parentMatrix: AnyObject, projectionMatrix: AnyObject, renderPassDescriptor: MTLRenderPassDescriptor, commandBuffer: MTLCommandBuffer, encoder: MTLRenderCommandEncoder?) -> MTLRenderCommandEncoder
     {
         var commandEncoder:MTLRenderCommandEncoder
-        
-        if encoder == nil
+        if let encoder = encoder
         {
-            commandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPassDescriptor)
-            commandEncoder.setDepthStencilState(depthState)
-            commandEncoder.setRenderPipelineState(baseEffect.renderPipelineState)
-            commandEncoder.setFragmentSamplerState(samplerState, atIndex: 0)
-            commandEncoder.setCullMode(MTLCullMode.Front)
+            commandEncoder = encoder
         }
         else
         {
-            commandEncoder = encoder!
+            commandEncoder = commandBuffer.renderCommandEncoderWithDescriptor(renderPassDescriptor)
         }
+        commandEncoder.setDepthStencilState(depthState)
+        commandEncoder.setRenderPipelineState(baseEffect.renderPipelineState)
+        commandEncoder.setFragmentSamplerState(samplerState, atIndex: 0)
+        commandEncoder.setCullMode(MTLCullMode.Front)
         
         
         commandEncoder.pushDebugGroup(node.name)

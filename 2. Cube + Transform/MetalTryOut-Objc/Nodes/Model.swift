@@ -71,10 +71,7 @@ import QuartzCore
         commandEncoder.endEncoding();
         
         // After command in command buffer is encoded for GPU we provide drawable that will be invoked when this command buffer has been scheduled for execution
-        if let drawableAnyObject = drawable as? MTLDrawable
-        {
-            commandBuffer.presentDrawable(drawableAnyObject);
-        }
+        commandBuffer.presentDrawable(drawable);
         
         // Commit commandBuffer to his commandQueue in which he will be executed after commands before him in queue
         commandBuffer.commit();
