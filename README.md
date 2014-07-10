@@ -1,6 +1,6 @@
 UPDATE
 ===================
-After finishing this try-out project I made Flappy bird colne with metal, go check it out https://github.com/haawa799/Metal-Flaps
+After finishing this try-out project I made Flappy bird colne with Metal, go check it out https://github.com/haawa799/Metal-Flaps
 
 
 METAL_Playground
