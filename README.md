@@ -2,6 +2,9 @@ METAL_Playground
 ===================
 Task: Create complex 3D scene app using Apples new Metal framework, using Swift as much as possible.
 
+After finishing this try-out project I made Flappy bird colne with metal, go check it out https://github.com/haawa799/Metal-Flaps
+
+
 NOTE1: Since I'm trying to use Swift where it's posiible, this code is not super efficient or fast, there are some wrappers which are not recommanded in this kind of projects.
 
 Hope to improve it as new Xcode betas will come out.
